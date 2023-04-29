@@ -1,0 +1,677 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap');
+
+:root{
+    --color-newprimary: #7380ec;
+    --color-newdanger: #ff7782;
+    --color-newsuccess: #41f1b6;
+    --color-newwarning: #ffbb55;
+    --color-newwhite: #fff;
+    --color-newinfo-dark: #7d8da1;
+    --color-newinfo-light: #dceleb;
+    --color-newdark: #363949;
+    --color-newlight: rgba(132, 139, 200, 0.18);
+    --color-newprimary-variant: #111e88;
+    --color-newdark-variant: #677483;
+    --color-newbackground: #1b1b11;
+
+    --card-border-radius: 2rem;
+    --card-padding:1.8rem;
+    --padding-1:1.2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem
+    
+    --padding-1: 1.2rem;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --ubuntu-font-family: 'Ubuntu', sans-serif;
+    --poppins-font-family: 'Poppins', sans-serif;
+
+
+}
+
+
+
+/* DARK THEME VARAIBLES */
+.dark-theme-variables {
+--color-newbackground: #181ale;
+--color-newwhite: #202528;
+--color-newdark: #edeffd;
+--color-newdark-variant: #a3bdcc;
+--color-newlight: Orgba(0, 0, 0, 0.4);
+--box-shadow: 0 2rem 3rem var (--color-light);
+}
+
+*{
+   margin: 0;
+   padding: 0;
+   outline: 0;
+   appearance: none;
+   border: 0;
+   text-decoration: none;
+   box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    /* font-family: var(--poppins-font-family); */
+    font-family: var(--ubuntu-font-family);
+    font-size: 0.88rem;
+    background: #eeeff1; 
+    user-select: none;
+    overflow-x: hidden;
+    /* color: var(--color-newwhite); */
+}
+
+a{
+    /* color: var(--color-newwhite); */
+}
+
+img{
+    display: block;
+    width: 100%;
+}
+
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2{
+    font-size: 1.4rem;
+}
+
+h3{
+    font-size: 0.87rem;
+}
+
+h4{
+    font-size: 0.8rem;
+}
+
+small{
+    font-size: 0.75rem;
+}
+
+
+.profile-photo{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+.text-muted{
+    color: var(--color-newinfo-dark);
+}
+
+p{
+    color: var(--color-newdark-variant);
+}
+
+b{
+    color: var(--color-newdark);
+}
+
+.newprimary{
+    color: var(--color-newprimary);
+}
+
+.newdanger{
+    color: var(--color-newdanger);
+}
+
+.newsuccess{
+    color: var(--color-newsuccess);
+}
+
+.newwarning{
+    color: var(--color-newwarning);
+}
+
+
+
+
+
+
+
+
+
+
+.container{
+    display: grid;
+    /* background: #41f1b6; */
+    width: 96%;
+    margin: 0 auto;
+    grid-template-columns: 16rem auto 23rem;
+    gap: 1.8rem;
+}
+
+aside{
+    height: 100vh;
+    /* background: grey; */
+}
+
+aside .top{
+    background: var(--color-newwhite);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .top .close{
+    display: none;
+}
+
+aside .logo{
+    display: flex;
+    gap: 0.8rem;
+}
+
+aside .logo img{
+    width: 2rem;
+    height: 2rem;
+}
+
+/* side bar ko css */
+
+aside .sidebar{
+   background: var(--color-newwhite);
+   display: flex;
+   flex-direction: column;
+   height: 86vh;
+   position: relative;
+   top: 3rem;
+}
+
+aside .sidebar a{
+    display: flex;
+    gap: 0.8rem;
+    padding: 1rem;
+    font-family: var(--ubuntu-font-family);
+    font-size: 1rem;
+    color: var(--color-newinfo-dark);
+    align-items: center;
+    position: relative;
+    /* height: 3.7rem; */
+    text-decoration: none;
+}
+
+aside .sidebar a:hover{
+    color: #30d8a0;
+    transition: all 300ms ease;
+}
+
+aside .sidebar a:hover span{
+    margin-left: 1rem;
+    transition: all 300ms ease;
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 1rem;
+}
+
+
+aside .sidebar a.active{
+    background: var(--color-newlight);
+    color: var(--color-newprimary);
+}
+
+aside .sidebar a.active:before{
+    content: '';
+    width: 6px;
+    height: 100%;
+    background: var(--color-newprimary);
+}
+
+
+/* main section ko css */
+
+
+
+main h1{
+    margin-top: 1.2rem;
+}
+
+main .top{
+    display: none;
+}
+
+
+main .insight{
+    margin-top: 2.4rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+    position: relative;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+
+main .insight > div{
+    background-color: var(--color-newwhite);
+    padding: var(--card-padding);
+    margin-top: 1rem;
+    border-radius: var(--card-border-radius);
+  
+}
+
+main .insight > div:hover{
+    box-shadow: none;
+}
+
+
+main .insight > div span{
+    background: var(--color-newprimary);
+    padding: 1.4rem;
+    color: var(--color-newwhite);
+    font-size: 3rem;
+    border-radius: 50%;
+
+}
+
+main .insight .income span{
+    background: var(--color-newwarning);
+}
+
+main .insight > div.expenditure span{
+    background: var(--color-newdanger);
+}
+
+main .insight .middle {
+    margin-top: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+
+main .insight h3{
+    font-size: 1rem;
+}
+
+
+main .insight svg{
+    width: 10rem;
+    height: 10rem;
+}
+
+main .insight svg circle{
+    fill: none;
+    stroke: var(--color-newprimary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    /* stroke-dasharray: 110;
+    stroke-dashoffset: 92; */
+}
+
+
+/* CSS FOR DETAIL INSIDE CIRCLE */
+
+.insight .progressSection{
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+
+.progressSection .progress1 svg circle{
+    transform: translate(24px, 24px);
+}
+
+
+.progressSection .progress1{
+    position: absolute;
+    transform: translate(-12px, -8px);
+}
+
+.progressSection .progress2{
+    font-size: 2rem;
+    transform: translate(15px, 40px);
+}
+
+
+/* Recent Order */
+
+.recent-order{
+    margin-top: 2rem;
+}
+
+.recent-order h2{
+    margin-bottom: 2rem;
+}
+
+
+.recent-order table{
+    background: var(--color-newwhite);
+    padding: var(--card-padding);
+    width: 1000px;
+    border-radius: var(--card-border-radius);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+    font-size: 1.18rem;
+}
+
+.recent-order table:hover{
+    box-shadow: none;
+}
+
+.recent-order tbody td{
+    height: 3rem;
+    border-bottom: 1px solid var(--color-newwarning);
+    color: var(--color-newdark-variant);
+}
+
+.recent-order tbody tr:last-child td{
+    border: none;
+}
+
+.recent-order a{
+    text-align: center;
+    display: block;
+    font-size: 1.2rem;
+
+}
+
+/* Left section ko css */
+
+
+.right .top{
+    display: flex;
+    gap: 1.4rem;
+    margin:1rem  ;
+}
+
+.right .top .theme-toggler span{
+    /* display: inline; */
+    cursor: pointer;
+    margin-left: 1.2rem;
+    font-size: 2.4rem;
+}
+
+.right .top .theme-toggler .lightMode{
+    background: var(--color-newprimary);
+    width: 35px;
+    border-radius: 10px;
+}
+
+.right .top .theme-toggler .lightMode:hover{
+    background:var(--color-newdanger);
+}
+
+.right .top .theme-toggler .darkMode:hover{
+    background: var(--color-newdark);
+    width: 35px;
+    border-radius: 10px;
+}
+
+
+
+
+.right .recent-update .update{
+    display: flex;
+    margin-top: 1.4rem;
+    gap: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--color-newdanger);
+    background: var(--color-newwhite);
+    padding: 1.8rem;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.right .update .message p{
+    margin: 1.2rem 0rem;
+}
+
+.right .update:last-child h3{
+    font-size: large;
+    margin-bottom: 1rem;
+}
+
+
+.right .top button{
+    display: none;
+    background: none;
+    cursor: pointer;
+    color: var(--color-newwhite);
+}
+
+/* Responsive Design */
+
+@media screen and (max-width:1325px){
+    .container{
+        width: 94%;
+        grid-template-columns: 14rem auto 20rem;
+       
+    }
+}
+
+@media screen and (max-width:1261px){
+    .container{
+        width: 100%;
+        grid-template-columns: 7rem auto 18rem;
+       
+    }
+}
+
+@media screen and (max-width:1200px){
+    .container{
+        width: 100%;
+        grid-template-columns: 10rem auto 18rem;
+    }
+}
+
+@media screen and (max-width:1150px){
+
+    .container{
+        width: 94%;
+        grid-template-columns: 6rem auto 18rem;
+    }
+
+    .aside .top{
+        display: none;
+    }
+
+    aside .sidebar a h3{
+        display: none;
+    }
+
+    aside .sidebar a:last-child{
+        position: relative;
+        margin-top: 1.8rem;
+    }
+
+    main .insight{
+        grid-template-columns:1fr;
+        gap: 0;
+
+    }
+
+    main .insight .middle {
+        margin-top: 1rem;
+        gap: 1rem;
+        justify-content: space-around;
+    }
+
+    main .recent-order{
+        width: 90%;
+        position: absolute;
+        margin-top: 6rem;
+    }
+    
+}
+
+
+@media screen and (max-width:768px){
+    .container{
+        width: 95%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    aside{
+        position: fixed;
+        left: 0;
+        width: 18rem;
+        height: 100vh;
+        z-index: 1;
+        background: var(--color-newwhite);
+        padding-right: var(--card-padding);
+        display: none;
+    }
+
+    aside .sidebar a h3{
+        display: inline;
+    }
+
+    aside .top .logo{
+        margin-left: 1rem;
+    }
+
+
+
+    .right .top{
+        position: fixed;
+        z-index: 2;
+        background: var(--color-newprimary);
+        width: 40%;
+        height: 4.6rem;
+        padding: 1rem;
+        border-radius: 2rem;
+        color: var(--color-newwhite);
+        box-shadow: 0 1rem 1rem 1rem var(--color-newinfo-light);
+    }
+
+    .right .top .profile p{
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        color: var(--color-newdanger);
+    }
+    
+    aside .top .close{
+        display: block;
+        cursor: pointer;
+    }
+
+    .right .recent-update{
+        margin-top: 7rem;
+    }
+
+    .right .top button{
+        display: block;
+        
+    }
+
+}
+
+
+@media screen and (max-width:653px){
+
+    .container{
+        grid-template-columns: 1fr;
+    }
+
+     .right .top{
+        display: none;
+        width: 50%;
+    }
+
+    main .top{
+        display: flex;
+        gap: 1rem;
+        background: var(--color-newprimary);
+        border-radius: var(--card-border-radius);
+        height: 3rem;
+        padding: 0.8rem;
+        margin-top: 1rem; 
+    }
+
+    main .top button{
+        background: none;
+        color: var(--color-newwhite);
+        cursor: pointer;
+    }
+
+    main .profile .newinfo{
+        font-size: 1.2rem;
+    }
+
+    main .profile p{
+        color: var(--color-newdanger);
+    }
+
+    .right .recent-update{
+        display: none;
+    }
+
+
+}
+
+
+
+
+.orderCard{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+.card {
+    width: 20rem;
+    margin: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-top: 10px;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
