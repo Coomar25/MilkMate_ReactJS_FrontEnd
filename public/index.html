@@ -36,6 +36,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+
+
+
 </head>
 
 <body>
@@ -51,6 +54,24 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+  <!-- this should go after your </body> -->
+
+  <script>
+    $('.date-picker').nepaliDatePicker({
+      dateFormat: '%D, %M %d, %y',
+      closeOnDateSelect: true,
+      minDate: 'सोम, जेठ १०, २०७३',
+      maxDate: 'मंगल, जेठ ३२, २०७३'
+    });
+
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/nepali-date-picker@2.0.1/dist/jquery.nepaliDatePicker.min.js"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/nepali-date-picker@2.0.1/dist/nepaliDatePicker.min.css"
+    crossorigin="anonymous" />
+
 
 
   <script>

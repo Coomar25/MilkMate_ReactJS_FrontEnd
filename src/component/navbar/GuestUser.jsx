@@ -50,7 +50,7 @@ const GuestUser = () => {
 
                         <div className="d-flex align-items-center">
                             <button type="button" className="btn btn-link px-3 me-2">
-                                <NavLink style={navLinksStyles} to="/guest" >Dashboard</NavLink>
+                                <NavLink style={navLinksStyles} to="/" >Dashboard</NavLink>
                             </button>
                             <button type="button" className="btn btn-link px-3 me-2">
                                 <NavLink style={navLinksStyles} to='/login' >Login</NavLink>
@@ -63,7 +63,7 @@ const GuestUser = () => {
             <div className="container">
                 <Routes>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/guest" element={<GuestDashboard />} />
+                    <Route path="/" element={<GuestDashboard />} />
                 </Routes>
             </div>
 

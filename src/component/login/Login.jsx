@@ -12,18 +12,17 @@ const Login = () => {
 
 
     const submitForm = () => {
-
         http.post('/login', { email: email, password: password }).then((res) => {
-            setToken(res.data.user, res.data.access_token, res.data.user.utype, res.data.user.utype);
+            setToken(res.data.user, res.data.access_token, res.data.user.utype);
             setUsertype(res.data.user.utype);
-            // console.log(res.data.user.utype);
+            console.log(res.data);
         });
     }
 
     return (
         <div>
-            <div className="container-fluid ">
-                <h1 className='pt-4 text-primary text-center'>Login Here</h1>
+            <h1 className='pt-4 text-primary loginTitle '>Login Here</h1>
+            <div className="container ">
                 <div className="loginContainer">
 
                     <form>

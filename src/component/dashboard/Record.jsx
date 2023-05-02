@@ -1,6 +1,16 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Record = () => {
+
+    const [deliveryRecord, setDeliveryRecord] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/farmerDailyRecords/1')
+    })
     return (
         <div>
             <section>

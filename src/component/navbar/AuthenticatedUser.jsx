@@ -1,10 +1,7 @@
 
 import { Routes, Route, Link } from 'react-router-dom';
 import Dashboard from '../dashboard/Dashboard';
-import Incomestatus from '../incomestatus/Incomestatus'
 import AuthUser from '../AuthUser/AuthUser';
-import GuestUser from './GuestUser';
-import { useState } from 'react';
 import './authUser.css'
 import Aside from '../dashboard/dashboardComponent/Aside';
 import Main from '../dashboard/dashboardComponent/Main';
@@ -30,15 +27,6 @@ function Auth() {
 
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
-                    <a className="navbar-brand me-2" href="https://mdbgo.com/">
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                            height="16"
-                            alt="MDB Logo"
-                            loading="lazy"
-                            style={{ marginTop: "-1px" }}
-                        />
-                    </a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -61,10 +49,7 @@ function Auth() {
 
                         <div className="d-flex align-items-center">
                             <button type="button" className="btn btn-link px-3 me-2">
-                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                            </button>
-                            <button type="button" className="btn btn-link px-3 me-2">
-                                <Link className="nav-link" to="/incomestatus">Income Status</Link>
+                                <Link className="nav-link" to="/dashboard">User Detail</Link>
                             </button>
                             <button type="button" className="btn btn-link px-3 me-2">
                                 <span role="button" className="nav-link" onClick={logoutUser}>Logout</span>
@@ -87,7 +72,6 @@ function Auth() {
                     <Routes>
                         {/* <Route path='/' element={<Dashboard />} /> */}
                         <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/incomestatus" element={<Incomestatus />} />
                         <Route path='/home' element={<Main />} />
                         <Route path='/record' element={<Record />} />
                         <Route path='/order' element={<Order />} />

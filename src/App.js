@@ -13,7 +13,6 @@ import AdminDashboard from "./component/Admin/AdminDashboard";
 function App() {
     return (
         <div className="App">
-
             <Router>
                 <Authentication />
             </Router >
