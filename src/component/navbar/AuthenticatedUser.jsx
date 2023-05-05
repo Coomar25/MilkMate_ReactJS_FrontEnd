@@ -7,6 +7,7 @@ import Aside from '../dashboard/dashboardComponent/Aside';
 import Main from '../dashboard/dashboardComponent/Main';
 import Record from '..//dashboard/Record';
 import Order from '../dashboard/Order';
+import Analytics from '../dashboard/Analytics';
 
 function Auth() {
     const { token, logout } = AuthUser();
@@ -75,6 +76,7 @@ function Auth() {
                         <Route path='/home' element={<Main />} />
                         <Route path='/record' element={<Record />} />
                         <Route path='/order' element={<Order />} />
+                        <Route path='/analytics' element={<Analytics />} />
                     </Routes>
                 </div>
             </div>

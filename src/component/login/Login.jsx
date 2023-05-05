@@ -6,7 +6,6 @@ import AuthUser from '../AuthUser/AuthUser'
 const Login = () => {
 
     const { http, setToken, setUsertype } = AuthUser();
-
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 

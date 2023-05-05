@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import AuthUser from '../../AuthUser/AuthUser';
 
-const UserOrder = () => {
-    const { token } = AuthUser();
-    const [farmersOrderData, setFarmersOrderData] = useState([]);
+const Analytics = () => {
+
+    const [individualFarmerOrders, setindividualFarmerOrders] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/farmersOrderRecord?token=${token}`).then(response => {
-            const parsedFarmerOrder = response.data.farmerOrderRecord;
+        axios.get(`http://localhost:8000/api/individualFarmerOrders?user_id=2`).then(response => {
+            const parsedFarmerOrder = response.data.indivudualOrder;
             const mergedData = parsedFarmerOrder.map(order => {
                 return {
                     user_id: order.user_id,
@@ -16,14 +15,17 @@ const UserOrder = () => {
                     price: order.price,
                     quantity: order.quantity,
                     created_at: order.created_at
-                };
+                }
+
             });
-            setFarmersOrderData(mergedData);
+            setindividualFarmerOrders(mergedData);
         }).catch(error => console.error(error));
     }, []);
 
+
+
     return (
-        <div className='farmertable'>
+        <div className='farmerOrderTable'>
             <table className='table'>
                 <thead>
                     <tr>
@@ -34,20 +36,22 @@ const UserOrder = () => {
                         <th scope='col'>Ordered Date</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {farmersOrderData.map(order => (
+                <thead>
+                    {individualFarmerOrders && individualFarmerOrders.map(order => (
                         <tr key={order.user_id}>
-                            <td>{order.user_id}</td>
-                            <td>{order.name}</td>
-                            <td>{order.price}</td>
-                            <td>{order.quantity}</td>
-                            <td>{order.created_at}</td>
+                            <th scope='col'> {order.user_id}</th>
+                            <th scope='col'>{order.name}</th>
+                            <th scope='col'>{order.price}</th>
+                            <th scope='col'>{order.quantity}</th>
+                            <th scope='col'>{order.created_at}</th>
                         </tr>
+
                     ))}
-                </tbody>
+
+                </thead>
             </table>
         </div>
-    );
-};
+    )
+}
 
-export default UserOrder;
+export default Analytics
