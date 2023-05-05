@@ -3,38 +3,41 @@ import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
 import "@sbmdkl/nepali-datepicker-reactjs/dist/index.css";
 import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const DeliveryRecord = () => {
+
+    const [date, setDate] = useState("");   //Nepali Calender
     const navigate = useNavigate();
-
-    const { http } = AuthUser();
-
+    const { http, token } = AuthUser();
     const [userId, setUserId] = useState('');
     const [fat, setFat] = useState('');
     const [litre, setLitre] = useState('');
-    const [deliveryDate, setDeliveryDate] = useState('');
+    // const [deliveryDate, setDeliveryDate] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        http.post('/storeDelivery', {
+        http.post(`/storeDelivery?token=${token}`, {
             user_id: userId,
             fat,
             litre,
-            date: deliveryDate,
+            // date: deliveryDate,
+            date: date
         }).then((response) => {
             navigate('/record');
-            // window.location.reload();
             alert(response.data.message);
             setUserId('');
             setFat('');
             setLitre('');
-            setDeliveryDate('');
+            // setDeliveryDate('');
+            window.location.reload();
+
         });
     };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
         switch (name) {
             case 'userId':
                 setUserId(value);
@@ -45,20 +48,43 @@ const DeliveryRecord = () => {
             case 'litre':
                 setLitre(value);
                 break;
-            case 'deliveryDate':
-                setDeliveryDate(value);
-                break;
+            // case 'deliveryDate':
+            //     setDeliveryDate(value);
+            //     break;
             default:
                 break;
         }
     };
 
 
-    const [date, setDate] = useState("");
 
-    const handleDate = ({ bsDate, adDate }) => {
-        setDate({ date: bsDate });
+    // const handleDate = ({ bsDate, adDate }) => {
+    //     setDate({ date: bsDate });
+    // };
+
+    const handleDate = ({ bsDate }) => {
+        setDate({ bsDate });
     };
+
+
+
+    const [statement, setStatement] = useState();
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/farmerDeliveredStatement`).then(response => {
+            const parsedRecordStatement = response.data.statement;
+
+            const mergedData = parsedRecordStatement.map(overallstatement => {
+                return {
+                    user_id: overallstatement.user_id,
+                    fat: overallstatement.fat,
+                    litre: overallstatement.litre,
+                    date: overallstatement.date,
+                    price: overallstatement.price
+                }
+            });
+            setStatement(mergedData);
+        }).catch(error => console.error(error));
+    }, []);
 
     return (
         <div className="deliveryRecord">
@@ -103,7 +129,7 @@ const DeliveryRecord = () => {
                     {/* <div className="col-md-4">
                         <label className="form-label">Delivery Date</label>
                         <input
-                            type="number"
+                            type="text"
                             value={deliveryDate}
                             name="deliveryDate"
                             onChange={handleChange}
@@ -115,7 +141,7 @@ const DeliveryRecord = () => {
 
                     <div className="row g-1">
                         <div className="col-md-12">
-                            <Calendar onChange={handleDate} value={date} name='deliverydate' language="en" theme="deepdark" />
+                            <Calendar onChange={handleDate} value={date} name='date' language="ne" theme="deepdark" />
                         </div>
                     </div>
                 </div>
@@ -126,6 +152,32 @@ const DeliveryRecord = () => {
                     </button>
                 </div>
             </form>
+
+
+            <div className='deliveryStatementAdmin'>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>User_ID</th>
+                            <th scope='col'>Fat</th>
+                            <th scope='col'>Litre</th>
+                            <th scope='col'>Date</th>
+                            <th scope='col'> Price</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        {statement && statement.map(overallstatement => (
+                            <tr key={overallstatement.user_id}>
+                                <th scope='col'>{overallstatement.user_id}</th>
+                                <th scope='col'>{overallstatement.fat}</th>
+                                <th scope='col'>{overallstatement.litre}</th>
+                                <th scope='col'>{overallstatement.date}</th>
+                                <th scope='col'>{overallstatement.price}</th>
+                            </tr>
+                        ))}
+                    </thead>
+                </table>
+            </div>
         </div>
     );
 };

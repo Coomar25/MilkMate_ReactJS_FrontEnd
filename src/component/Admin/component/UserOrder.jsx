@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AuthUser from '../../AuthUser/AuthUser';
 
 const UserOrder = () => {
+    const { token } = AuthUser();
     const [farmersOrderData, setFarmersOrderData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/farmersOrderRecord').then(response => {
+        axios.get(`http://localhost:8000/api/farmersOrderRecord?token=${token}`).then(response => {
             const parsedFarmerOrder = response.data.farmerOrderRecord;
 
             const mergedData = parsedFarmerOrder.map(order => {
@@ -17,7 +19,6 @@ const UserOrder = () => {
                     created_at: order.created_at
                 };
             });
-
             setFarmersOrderData(mergedData);
         }).catch(error => console.error(error));
     }, []);

@@ -2,19 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
 
-
-
-
-
-
-
-
-
 const Register = () => {
-
-
     const navigate = useNavigate();
-    const { http } = AuthUser();
+    const { http, token } = AuthUser();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +13,7 @@ const Register = () => {
     const [contact, setContact] = useState('');
 
     const handleSubmit = () => {
-        http.post('/register', {
+        http.post(`/register?token =${token}`, {
             email,
             password,
             name,

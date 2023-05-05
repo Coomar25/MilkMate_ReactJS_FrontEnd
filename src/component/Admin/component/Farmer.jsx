@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import AuthUser from '../../AuthUser/AuthUser'
 
 const Farmer = () => {
-
+    const { token } = AuthUser();
     const [farmersData, setFarmersData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/totalFarmers').then(response => {
+        axios.get(`http://localhost:8000/api/totalFarmers?token=${token}`).then(response => {
             const parsedFarmerData = response.data.farmersData;
             const addInfo = response.data.addInfo;
 

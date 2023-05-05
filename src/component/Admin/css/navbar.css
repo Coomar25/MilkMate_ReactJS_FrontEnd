@@ -122,6 +122,16 @@ span {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+.deliveryStatementAdmin{
+	background-color: #2BD6B4;
+	width: 1000px;
+	padding: 4rem;
+	border-radius: 1rem;
+	position: absolute;
+	top: 170%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 
 .deliveryRecord{
 	background-color: #2BD6B4;
@@ -145,3 +155,44 @@ span {
 	transform: translate(-50%, -50%);
 
 }
+
+
+.adminorderCard{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+	margin-top: 40rem;
+
+}
+
+
+.admincard {
+    width: 20rem;
+    margin: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	
+  }
+  
+  .admincard-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .admincard-body {
+    text-align: center;
+  }
+  
+  .admincard-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .admincard-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+
+
+
+

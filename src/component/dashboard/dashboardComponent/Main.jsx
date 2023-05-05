@@ -1,15 +1,21 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
+import AuthUser from '../../AuthUser/AuthUser';
 
 const Main = () => {
+    const { user, token } = AuthUser();
+    const userId = user.id;
     const [earningStatus, setEarningStatus] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/api/farmerTotalEarning/1')
+            .get(`http://localhost:8000/api/farmerTotalEarning?token=${token}`)
             .then(response => {
                 const parsedFarmerEarning = response.data.earningFarmer;
                 console.log(parsedFarmerEarning);
@@ -30,11 +36,20 @@ const Main = () => {
                 setError(error);
                 setIsLoading(false);
             });
+
+
     }, []);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div className='loadingSection'>
+            <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+                <LinearProgress color="secondary" />
+                <LinearProgress color="success" />
+                <LinearProgress color="inherit" />
+            </Stack>
+        </div>;
     }
+
 
     if (error) {
         return <div>Something went wrong: {error.message}</div>;
