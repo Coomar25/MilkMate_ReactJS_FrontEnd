@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import './login.css'
 import { NavLink } from 'react-router-dom'
 import AuthUser from '../AuthUser/AuthUser'
+import ForgotPasswordLink from './ForgotPasswordLink'
+import { Routes, Route, Link } from 'react-router-dom';
+
 
 const Login = () => {
 
@@ -13,8 +16,8 @@ const Login = () => {
     const submitForm = () => {
         http.post('/login', { email: email, password: password }).then((res) => {
             setToken(res.data.user, res.data.access_token, res.data.user.utype);
-            setUsertype(res.data.user.utype);
-            console.log(res.data);
+        }).catch((error) => {
+            alert('Invalid Login and Password');
         });
     }
 
@@ -46,7 +49,8 @@ const Login = () => {
                             </div>
 
                             <div className="col">
-                                <a href="#!">Forgot password?</a>
+                                {/* <a href="#!">Forgot password?</a> */}
+                                <Link to='/forgetpassword'> Forget Password</Link>
                             </div>
                         </div>
 
@@ -59,6 +63,15 @@ const Login = () => {
 
 
             </div>
+
+
+            {/* <div class="container-fluid container">
+                <div className="container">
+                    <Routes>
+                        <Route path="/forgetpassword" element={<ForgotPasswordLink />} />
+                    </Routes>
+                </div>
+            </div> */}
 
         </div>
     )

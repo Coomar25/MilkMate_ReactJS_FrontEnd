@@ -1,9 +1,10 @@
 import React from 'react';
-import { NavLink, navLinksStyles } from 'react-router-dom';
+import { NavLink, Router, navLinksStyles } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../login/Login'
 import GuestDashboard from '../dashboard/GuestDashboard'
 import AuthUser from '../AuthUser/AuthUser';
+import ForgotPasswordLink from '../login/ForgotPasswordLink';
 
 const GuestUser = () => {
 
@@ -63,7 +64,9 @@ const GuestUser = () => {
             <div className="container">
                 <Routes>
                     <Route path="/login" element={<Login />} />
+
                     <Route path="/" element={<GuestDashboard />} />
+                    <Route path="/forgetpassword" element={<ForgotPasswordLink />} />
                 </Routes>
             </div>
 
