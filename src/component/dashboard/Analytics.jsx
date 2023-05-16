@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import http from '../AuthUser/AuthUser';
+import AuthUser from '../AuthUser/AuthUser';
 
 const Analytics = () => {
 
+    const { token } = AuthUser();
     const [individualFarmerOrders, setindividualFarmerOrders] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/individualFarmerOrders?user_id=2`).then(response => {
+        axios.get(`http://localhost:8000/api/individualFarmerOrders?token=${token}`).then(response => {
             const parsedFarmerOrder = response.data.indivudualOrder;
             const mergedData = parsedFarmerOrder.map(order => {
                 return {

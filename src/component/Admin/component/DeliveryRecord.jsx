@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
 import "@sbmdkl/nepali-datepicker-reactjs/dist/index.css";
+
 import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -141,7 +142,7 @@ const DeliveryRecord = () => {
 
                     <div className="row g-1">
                         <div className="col-md-12">
-                            <Calendar onChange={handleDate} value={date} name='date' language="ne" theme="deepdark" />
+                            <Calendar onChange={handleDate} value={date} name='date' language="en" theme="deepdark" />
                         </div>
                     </div>
                 </div>
@@ -172,7 +173,7 @@ const DeliveryRecord = () => {
                                 <th scope='col'>{overallstatement.fat}</th>
                                 <th scope='col'>{overallstatement.litre}</th>
                                 <th scope='col'>{overallstatement.date}</th>
-                                <th scope='col'>{overallstatement.price}</th>
+                                <th scope='col'>Nrs. {overallstatement.price} /-</th>
                             </tr>
                         ))}
                     </thead>

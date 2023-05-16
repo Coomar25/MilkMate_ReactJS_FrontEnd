@@ -9,6 +9,8 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
+import Khalti from './khalti/Khalti';
+import { createContext } from 'react';
 
 
 const style = {
@@ -22,6 +24,8 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
+
+// const AppState = createContext();
 
 
 const Order = () => {
@@ -66,6 +70,7 @@ const Order = () => {
         }).then((response) => {
             // console.log(response);
             alert(response.data.message);
+            window.location.reload();
 
         });
     }
@@ -152,9 +157,14 @@ const Order = () => {
                                         />
                                         <Stack className='mt-4' spacing={2} direction="row">
                                             <Button variant="contained" onClick={handleOrder} >Dairy Income</Button>
-                                            <Button variant="outlined">Khalti</Button>
                                         </Stack>
                                     </form>
+                                    {/* <AppState.Provider value={{ selectedItem }}>
+                                        <Khalti className="mt-4" />
+                                    </AppState.Provider> */}
+
+                                    <Khalti className="mt-4" />
+
                                 </Box>
                             </Modal>
                         </div>
@@ -167,3 +177,4 @@ const Order = () => {
 }
 
 export default Order
+// export { AppState }

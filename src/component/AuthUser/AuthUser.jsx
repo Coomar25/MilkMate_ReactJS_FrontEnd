@@ -27,7 +27,6 @@ export default function AuthUser() {
     }
 
 
-
     const [token, setToken] = useState(getToken());
     const [user, setUser] = useState(getUser());
     const [roles, setRoles] = useState(getUtype());

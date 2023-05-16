@@ -26,10 +26,12 @@ const Inventory = () => {
             }
         }).then(response => {
             console.log(response);
+            alert('Product Has Been Added To Inventory');
             setName('');
             setPrice('');
             setDescription('');
             setImage('');
+            window.location.reload();
             navigate('/inventory');
         }).catch(error => {
             console.log(error);
@@ -41,10 +43,10 @@ const Inventory = () => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/fetchSuppyItem').then(response => {
             const parsedSuppyItem = response.data.supplyItem;
-
+            console.log(parsedSuppyItem);
             const mergedData = parsedSuppyItem.map(supply => {
                 return {
-                    user_id: supply.user_id,
+                    id: supply.id,
                     name: supply.name,
                     description: supply.description,
                     price: supply.price,
@@ -57,7 +59,17 @@ const Inventory = () => {
     }, []);
 
 
-
+    const handleDelete = (id) => {
+        console.log(id);
+        axios.post(`http://localhost:8000/api/deleteInventory/${id}`).then((response) => {
+            console.log(response);
+            alert("Product has been deleted form inventory");
+            window.location.reload();
+            navigate('/inventory');
+        }).catch((error) => {
+            alert(error);
+        });
+    }
 
     return (
         <div>
@@ -93,22 +105,18 @@ const Inventory = () => {
 
 
             <div className="adminorderCard">
-
-                {suppyitem.map(supply => (
+                {suppyitem && suppyitem.map(supply => (
                     <div class="admincard p-4">
                         <img class="admincard-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
                         <div class="admincard-body">
-                            <h5 class="admincard-title">Name = {supply.name}</h5>
-                            <p class="admincard-title">Price =Nrs. {supply.price}</p>
+                            {/* <h5 class="admincard-title mt-4">{supply.id}</h5> */}
+                            <h5 class="admincard-title mt-4">{supply.name}</h5>
+                            <p class="admincard-title">Nrs. {supply.price}</p>
                             <p class="admincard-text">{supply.description}</p>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger" onClick={() => handleDelete(supply.id)} >  Delete </button>
                         </div>
                     </div>
                 ))}
-
-
-
-
             </div>
         </div>
     )
