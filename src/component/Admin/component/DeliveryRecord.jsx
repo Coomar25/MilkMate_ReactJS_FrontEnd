@@ -142,7 +142,9 @@ const DeliveryRecord = () => {
 
                     <div className="row g-1">
                         <div className="col-md-12">
-                            <Calendar onChange={handleDate} value={date} name='date' language="en" theme="deepdark" />
+                            <div style={{ pointerEvents: "none" }}>
+                                <Calendar onChange={handleDate} value={date} name="date" language="ne" theme="deepdark" />
+                            </div>
                         </div>
                     </div>
                 </div>

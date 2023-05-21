@@ -22,7 +22,7 @@ const AdminDashboard = () => {
 
             <div className="adminNavbar">
                 <NavLink to='/dashboard'>  <a href="#">Farmer</a> </NavLink>
-                <NavLink to='/record'>  <a href="#">Delivery Record</a> </NavLink>
+                <NavLink to='/record'>  <a href="#">Collection Record</a> </NavLink>
                 <NavLink to='/register'>  <a href="#">Register</a> </NavLink>
                 <NavLink to='/inventory'>  <a href="#">Inventory</a> </NavLink>
                 <NavLink to='/userOrder'>  <a href="#">Order</a> </NavLink>

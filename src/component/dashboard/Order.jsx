@@ -64,7 +64,7 @@ const Order = () => {
     }
 
     const handleOrder = () => {
-        http.post(`/orderRecord?token=${token}`, {
+        http.post(`http://localhost:8000/api/orderRecord?token=${token}`, {
             user_id: user.id,
             name: productname,
             price: productprice,

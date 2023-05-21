@@ -12,6 +12,7 @@ function DeliveryTable() {
     const [deliveryRecord, setDeliveryRecord] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [estimateFatLitrePrice, setEstimateFatLitrePrice] = useState([]);
 
     useEffect(() => {
         // axios.get(`http://localhost:8000/api/farmerDailyRecords/${userId}`)
@@ -26,6 +27,16 @@ function DeliveryTable() {
                 setIsLoading(false);
             });
     }, []);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/estimateFatLitrePrice?token=${token}`).then(res => {
+            setEstimateFatLitrePrice(res.data);
+            // console.log(res.data);
+        }).catch(error => {
+            alert(error);
+            // console.log(error);
+        })
+    }, [])
 
 
     if (isLoading) {
@@ -74,9 +85,21 @@ function DeliveryTable() {
                                     <td>{record.price}</td>
                                 </tr>
                             ))}
-
+                        </tbody>
+                        <hr />
+                        <tbody>
+                            <tr>
+                                <th> Total</th>
+                                <th></th>
+                                <th></th>
+                                <th>{estimateFatLitrePrice.totalLitre}</th>
+                                <th>{estimateFatLitrePrice.totalFat}</th>
+                                <th>Nrs. {estimateFatLitrePrice.totalPrice}/-</th>
+                            </tr>
 
                         </tbody>
+
+
                     </table>
 
                 </div>

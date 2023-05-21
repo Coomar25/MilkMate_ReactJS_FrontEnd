@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import './login.css'
-import { NavLink } from 'react-router-dom'
 import AuthUser from '../AuthUser/AuthUser'
-import ForgotPasswordLink from './ForgotPasswordLink'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {

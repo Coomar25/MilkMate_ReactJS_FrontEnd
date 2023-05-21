@@ -19,7 +19,6 @@ const Analytics = () => {
                     quantity: order.quantity,
                     created_at: order.created_at
                 }
-
             });
             setindividualFarmerOrders(mergedData);
         }).catch(error => console.error(error));
@@ -50,7 +49,6 @@ const Analytics = () => {
                         </tr>
 
                     ))}
-
                 </thead>
             </table>
         </div>
