@@ -5,6 +5,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 import AuthUser from '../../AuthUser/AuthUser';
+import Loading from '../Loading';
 
 const Main = () => {
     const { user, token } = AuthUser();
@@ -18,8 +19,7 @@ const Main = () => {
             .get(`http://localhost:8000/api/farmerTotalEarning?token=${token}`)
             .then(response => {
                 const parsedFarmerEarning = response.data.earningFarmer;
-                console.log(parsedFarmerEarning);
-
+                // console.log(parsedFarmerEarning);
                 const mergedData = {
                     user_id: parsedFarmerEarning.user_id,
                     earning: parsedFarmerEarning.earning,
@@ -41,12 +41,8 @@ const Main = () => {
     }, []);
 
     if (isLoading) {
-        return <div className='loadingSection'>
-            <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
-                <LinearProgress color="secondary" />
-                <LinearProgress color="success" />
-                <LinearProgress color="inherit" />
-            </Stack>
+        return <div>
+            <Loading />
         </div>;
     }
 

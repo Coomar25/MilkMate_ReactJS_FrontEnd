@@ -6,6 +6,7 @@ import "@sbmdkl/nepali-datepicker-reactjs/dist/index.css";
 import Calendar from '@sbmdkl/nepali-datepicker-reactjs';
 import { useEffect } from 'react';
 import axios from 'axios';
+import AdminLoadingSection from './AdminLoadingSection'
 
 const DeliveryRecord = () => {
 
@@ -16,6 +17,11 @@ const DeliveryRecord = () => {
     const [fat, setFat] = useState('');
     const [litre, setLitre] = useState('');
     // const [deliveryDate, setDeliveryDate] = useState('');
+    const [statement, setStatement] = useState();
+
+    //For Loading
+    const [isLoading, setIsLoading] = useState(true);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -69,11 +75,11 @@ const DeliveryRecord = () => {
 
 
 
-    const [statement, setStatement] = useState();
+
     useEffect(() => {
         axios.get(`http://localhost:8000/api/farmerDeliveredStatement`).then(response => {
             const parsedRecordStatement = response.data.statement;
-
+            setIsLoading(false);
             const mergedData = parsedRecordStatement.map(overallstatement => {
                 return {
                     user_id: overallstatement.user_id,
@@ -86,6 +92,12 @@ const DeliveryRecord = () => {
             setStatement(mergedData);
         }).catch(error => console.error(error));
     }, []);
+
+    if (isLoading) {
+        return <AdminLoadingSection />
+    }
+
+
 
     return (
         <div className="deliveryRecord">

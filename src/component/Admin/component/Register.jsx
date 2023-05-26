@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
+import AdminLoadingSection from './AdminLoadingSection';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -11,8 +12,11 @@ const Register = () => {
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
+    //fOR lOADING
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = () => {
+        setIsLoading(true); // Set isLoading to true before making the request
         http.post(`/register?token =${token}`, {
             email,
             password,
@@ -21,6 +25,7 @@ const Register = () => {
             address,
             contact,
         }).then((response) => {
+            setIsLoading(true);
             setName('');
             setEmail('');
             setPassword('');
@@ -29,6 +34,8 @@ const Register = () => {
             setContact('');
             navigate('/dashboard');
             alert(response.data.message);
+        }).finally(() => {
+            setIsLoading(false); // Set isLoading to false after the request is completed
         });
     };
 
@@ -60,7 +67,9 @@ const Register = () => {
 
 
 
-
+    if (isLoading) {
+        return <AdminLoadingSection />
+    }
 
 
 

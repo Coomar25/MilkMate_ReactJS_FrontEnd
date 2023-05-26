@@ -1,13 +1,13 @@
 import React from 'react'
-import { NavLink, Route } from 'react-router-dom'
-
-
-
-
+import { NavLink } from 'react-router-dom'
+import AuthUser from '../../AuthUser/AuthUser'
 const Aside = () => {
-
-
-
+    const { logout, token } = AuthUser();
+    const logoutUser = () => {
+        if (token != undefined) {
+            logout();
+        }
+    }
     return (
         <div>
             <aside>
@@ -58,24 +58,24 @@ const Aside = () => {
                     </NavLink>
 
 
-                    <NavLink to='/setting'>
+                    {/* <NavLink to='/setting'>
                         <span class="material-icons-sharp">
                             settings
                         </span>
                         <h3>Setting</h3>
-                    </NavLink>
+                    </NavLink> */}
 
 
-                    <NavLink>
+                    <NavLink to='/login' onClick={logoutUser}>
                         <span class="material-icons-sharp">
                             logout
                         </span>
                         <h3>Logout</h3>
-
                     </NavLink>
                 </div>
 
             </aside>
+
 
 
         </div>

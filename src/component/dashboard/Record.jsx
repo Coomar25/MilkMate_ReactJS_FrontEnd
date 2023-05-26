@@ -5,6 +5,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
 import AuthUser from '../AuthUser/AuthUser';
+import Loading from './Loading';
 
 function DeliveryTable() {
     const { user, token } = AuthUser();
@@ -22,9 +23,9 @@ function DeliveryTable() {
                 setIsLoading(false);
             })
             .catch(err => {
+                setIsLoading(false);
                 console.log(err);
                 setError(error);
-                setIsLoading(false);
             });
     }, []);
 
@@ -40,12 +41,8 @@ function DeliveryTable() {
 
 
     if (isLoading) {
-        return <div className='loadingSection'>
-            <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
-                <LinearProgress color="secondary" />
-                <LinearProgress color="success" />
-                <LinearProgress color="inherit" />
-            </Stack>
+        return <div>
+            <Loading />
         </div>;
     }
 
@@ -72,7 +69,6 @@ function DeliveryTable() {
                                 <th>Milk_Fat</th>
                                 <th>Price</th>
                             </tr>
-
                         </thead>
                         <tbody>
                             {deliveryRecord.map(record => (
@@ -85,13 +81,11 @@ function DeliveryTable() {
                                     <td>{record.price}</td>
                                 </tr>
                             ))}
+                            <hr />
                         </tbody>
-                        <hr />
                         <tbody>
                             <tr>
-                                <th> Total</th>
-                                <th></th>
-                                <th></th>
+                                <th colSpan={3}> Total Milk Delivery Record Statement Without Expenditure </th>
                                 <th>{estimateFatLitrePrice.totalLitre}</th>
                                 <th>{estimateFatLitrePrice.totalFat}</th>
                                 <th>Nrs. {estimateFatLitrePrice.totalPrice}/-</th>

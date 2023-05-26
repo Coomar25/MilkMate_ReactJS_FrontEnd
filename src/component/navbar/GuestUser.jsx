@@ -20,15 +20,6 @@ const GuestUser = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
-                    <a className="navbar-brand me-2" href="https://mdbgo.com/">
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                            height="16"
-                            alt="MDB Logo"
-                            loading="lazy"
-                            style={{ marginTop: "-1px" }}
-                        />
-                    </a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -64,7 +55,6 @@ const GuestUser = () => {
             <div className="container">
                 <Routes>
                     <Route path="/login" element={<Login />} />
-
                     <Route path="/" element={<GuestDashboard />} />
                     <Route path="/forgetpassword" element={<ForgotPasswordLink />} />
                 </Routes>

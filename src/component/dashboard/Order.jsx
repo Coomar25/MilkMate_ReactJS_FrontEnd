@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import Loading from './Loading';
 
 import Khalti from './khalti/Khalti';
 import { createContext } from 'react';
@@ -32,6 +33,9 @@ const Order = () => {
     const { http, token, user } = AuthUser();
     const [suppyitem, setSupplyItem] = useState([]);
 
+    //For Loding Icon
+    const [isLoading, setIsLoading] = useState(true);
+
     //This is for ordering item
     const [productname, setProductName] = useState('');
     const [productprice, setProductPrice] = useState('');
@@ -42,13 +46,14 @@ const Order = () => {
     const [selectedItem, setSelectedItem] = useState('');
 
 
+
     const handleOpen = (item) => {
         setSelectedItem(item);
         setOpen(true);
     }
+
+    //for Model
     const handleClose = () => setOpen(false);
-
-
 
     const handleChange = (event) => {
         setProductName(selectedItem.name);
@@ -77,10 +82,12 @@ const Order = () => {
         });
     }
 
+
     //fetch supplies item from server with image
     useEffect(() => {
         axios.get(`http://localhost:8000/api/fetchSuppyItem?token = ${token}`).then(response => {
             const parsedSuppyItem = response.data.supplyItem;
+            setIsLoading(false);
             const mergedData = parsedSuppyItem.map(supply => {
                 return {
                     id: supply.id,
@@ -91,8 +98,19 @@ const Order = () => {
                 };
             });
             setSupplyItem(mergedData);
-        }).catch(error => console.error(error));
+        }).catch(error => {
+            setIsLoading(false);
+            console.error(error);
+        });
     }, []);
+
+
+    if (isLoading) {
+        return <div>
+            <Loading />
+        </div>;
+
+    }
 
 
     return (
@@ -164,9 +182,7 @@ const Order = () => {
                                     {/* <AppState.Provider value={{ selectedItem }}>
                                         <Khalti className="mt-4" />
                                     </AppState.Provider> */}
-
                                     <Khalti className="mt-4" />
-
                                 </Box>
                             </Modal>
                         </div>

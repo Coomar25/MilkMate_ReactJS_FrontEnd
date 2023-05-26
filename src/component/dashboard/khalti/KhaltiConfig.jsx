@@ -5,10 +5,11 @@ import axios from 'axios';
 
 
 let config = {
-    // replace this key with yours
     "publicKey": myKey.publicTestKey,
+    "productName": "product 1",
+    "description": "Description here",
+    "quantity": "quantity here",
     "productIdentity": "1234567890",
-    "productName": "Drogon",
     "productUrl": "http://gameofthrones.com/buy/Dragons",
     "eventHandler": {
         onSuccess(payload) {
@@ -18,12 +19,10 @@ let config = {
                 "token": payload.token,
                 "amount": payload.amount
             };
-
             let config = {
                 headers: { 'Authorization': myKey.secretKey }
             };
-
-            axios.post("http://localhost:8000/api/khalticheckout", data, config).then(response => {
+            axios.post("http://localhost:8000/api/khalticheckout", payload, config).then(response => {
                 console.log(response.data);
             }).catch(error => {
                 console.log(error);

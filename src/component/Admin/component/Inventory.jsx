@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
+import AdminLoadingSection from './AdminLoadingSection'
 
 const Inventory = () => {
     const { token } = AuthUser();
@@ -11,8 +12,11 @@ const Inventory = () => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    //fOR lOADING
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (event) => {
+        setIsLoading(true); // Set isLoading to true before making the request
         event.preventDefault();
         const formData = new FormData();
         formData.append('name', name);
@@ -35,6 +39,8 @@ const Inventory = () => {
             navigate('/inventory');
         }).catch(error => {
             console.log(error);
+        }).finally(() => {
+            setIsLoading(false); // Set isLoading to false after the request is completed
         });
     }
 
@@ -70,6 +76,12 @@ const Inventory = () => {
             alert(error);
         });
     }
+
+
+    if (isLoading) {
+        return <AdminLoadingSection />
+    }
+
 
     return (
         <div>

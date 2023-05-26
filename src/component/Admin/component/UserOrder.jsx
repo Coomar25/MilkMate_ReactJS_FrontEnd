@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AuthUser from '../../AuthUser/AuthUser';
+import AdminLoadingSection from './AdminLoadingSection'
 
 const UserOrder = () => {
     const { token } = AuthUser();
     const [farmersOrderData, setFarmersOrderData] = useState([]);
+    //For Loading Section
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/farmersOrderRecord?token=${token}`).then(response => {
             const parsedFarmerOrder = response.data.farmerOrderRecord;
+            setIsLoading(false);
             const mergedData = parsedFarmerOrder.map(order => {
                 return {
                     user_id: order.user_id,
@@ -21,6 +25,12 @@ const UserOrder = () => {
             setFarmersOrderData(mergedData);
         }).catch(error => console.error(error));
     }, []);
+
+
+    if (isLoading) {
+        <AdminLoadingSection />
+    }
+
 
     return (
         <div className='farmertable'>

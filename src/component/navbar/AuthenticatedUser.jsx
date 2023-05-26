@@ -52,7 +52,7 @@ function Auth() {
                             <button type="button" className="btn btn-link px-3 me-2">
                                 <Link className="nav-link" to="/dashboard">User Detail</Link>
                             </button>
-                            <button type="button" className="btn btn-link px-3 me-2">
+                            <button type="button" className="btn btn-link px-3 me-2 d-flex p-2">
                                 <span role="button" className="nav-link" onClick={logoutUser}>Logout</span>
                             </button>
                         </div>

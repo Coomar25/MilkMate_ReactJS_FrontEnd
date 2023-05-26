@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import AuthUser from '../../AuthUser/AuthUser'
+import AdminLoadingSection from './AdminLoadingSection'
 
 const Farmer = () => {
     const { token } = AuthUser();
     const [farmersData, setFarmersData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/totalFarmers?token=${token}`).then(response => {
             const parsedFarmerData = response.data.farmersData;
+            setIsLoading(false);
             const addInfo = response.data.addInfo;
 
             const mergedData = parsedFarmerData.map(farmer => {
@@ -19,6 +22,10 @@ const Farmer = () => {
             setFarmersData(mergedData);
         }).catch(error => console.error(error));
     }, []);
+
+    if (isLoading) {
+        return <AdminLoadingSection />
+    }
 
     return (
         <div className='farmertable'>
