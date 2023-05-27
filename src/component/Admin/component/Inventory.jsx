@@ -1,9 +1,30 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
 import AdminLoadingSection from './AdminLoadingSection'
+
+
+//material ui 
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+//model styling
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 const Inventory = () => {
     const { token } = AuthUser();
@@ -12,6 +33,15 @@ const Inventory = () => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const [batch, setBatch] = useState('');
+    const [category, setCategory] = useState('');
+    const [companyname, setCompanyName] = useState('');
+    const [quantity, setQuantity] = useState('');
+    const [expirydate, setExpiryDate] = useState('');
+    const [supplyid, setSupplyid] = useState('');
+    const [editSuppyId, setEditSupplyId] = useState('');
+
+
     //fOR lOADING
     const [isLoading, setIsLoading] = useState(false);
 
@@ -23,6 +53,11 @@ const Inventory = () => {
         formData.append('price', price);
         formData.append('description', description);
         formData.append('image', image);
+        formData.append('batch', batch);
+        formData.append('category', category);
+        formData.append('companyname', companyname);
+        formData.append('expirydate', expirydate);
+        formData.append('quantity', quantity);
 
         axios.post(`http://localhost:8000/api/supplyItem?token=${token}`, formData, {
             headers: {
@@ -31,6 +66,11 @@ const Inventory = () => {
         }).then(response => {
             console.log(response);
             alert('Product Has Been Added To Inventory');
+            setBatch('');
+            setCategory('');
+            setCompanyName('');
+            setExpiryDate('');
+            setQuantity('')
             setName('');
             setPrice('');
             setDescription('');
@@ -44,12 +84,60 @@ const Inventory = () => {
         });
     }
 
+
+    // =================================================================================================================================================================
+
+    //edit section
+    const handleEditSubmit = (event) => {
+        // setIsLoading(true); // Set isLoading to true before making the request
+
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append('image', image);
+        formData.append('batch', batch);
+        formData.append('category', category);
+        formData.append('companyname', companyname);
+        formData.append('expirydate', expirydate);
+        formData.append('quantity', quantity);
+        console.log(supplyid);
+        axios.post(`http://localhost:8000/api/updateInventory/${editSuppyId}?token=${token}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(response => {
+            console.log(response);
+            alert('Product Has Been Updated Successfully');
+            setBatch('');
+            setCategory('');
+            setCompanyName('');
+            setExpiryDate('');
+            setQuantity('')
+            setName('');
+            setPrice('');
+            setDescription('');
+            setImage('');
+            window.location.reload();
+            navigate('/inventory');
+        }).catch(error => {
+            console.log(error);
+        }).finally(() => {
+            setIsLoading(false); // Set isLoading to false after the request is completed
+        });
+    }
+
+
+    // =================================================================================================================================================================
+
+
     const [suppyitem, setSupplyItem] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/fetchSuppyItem').then(response => {
             const parsedSuppyItem = response.data.supplyItem;
-            console.log(parsedSuppyItem);
+            // console.log(parsedSuppyItem);
             const mergedData = parsedSuppyItem.map(supply => {
                 return {
                     id: supply.id,
@@ -59,16 +147,15 @@ const Inventory = () => {
                     image: supply.image
                 };
             });
-
             setSupplyItem(mergedData);
         }).catch(error => console.error(error));
     }, []);
 
-
+    // ============================================================================Delete Action======================================================================
     const handleDelete = (id) => {
         console.log(id);
         axios.post(`http://localhost:8000/api/deleteInventory/${id}`).then((response) => {
-            console.log(response);
+            // console.log(response);
             alert("Product has been deleted form inventory");
             window.location.reload();
             navigate('/inventory');
@@ -77,16 +164,66 @@ const Inventory = () => {
         });
     }
 
+    // =============================================================Model Opening=============================================================================================
 
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = (id) => {
+        console.log(id);
+        setEditSupplyId(id);
+        setOpen(true);
+    }
+    const handleClose = () => setOpen(false);
+    // =============================================================Loading Section=============================================================================================
+
+    //Loading Section
     if (isLoading) {
         return <AdminLoadingSection />
     }
 
 
+    // ===============================================================Component Rendering===================================================================================
+
     return (
         <div>
-            <div className='inventory'>
-                <form onSubmit={handleSubmit} className="row g-3">
+            <div className='inventory mt-4'>
+                <form onSubmit={handleSubmit} className="row g-3 mt-4">
+                    <div className="col-md-6">
+                        <label className="form-label"> Batch</label>
+                        <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} className="form-control is-valid" required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <label className="form-label">Category</label>
+                        <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control is-valid" required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div className="col-md-6">
+                        <label className="form-label"> Company Name</label>
+                        <input type="text" value={companyname} onChange={(e) => setCompanyName(e.target.value)} className="form-control is-valid" required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <label className="form-label">Quantity</label>
+                        <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-control is-valid" required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div className="col-md-12">
+                        <label className="form-label">Expiry Date</label>
+                        <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control is-valid" required />
+                        <div className="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
                     <div className="col-md-6">
                         <label className="form-label"> Name</label>
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control is-valid" required />
@@ -115,6 +252,10 @@ const Inventory = () => {
                 </form>
             </div>
 
+            {/* // =========================================================================================================================== */}
+            {/* // =======================================================Card Disolaying======================================================= */}
+            {/* // =========================================================================================================================== */}
+
 
             <div className="adminorderCard">
                 {suppyitem && suppyitem.map(supply => (
@@ -125,7 +266,83 @@ const Inventory = () => {
                             <h5 class="admincard-title mt-4">{supply.name}</h5>
                             <p class="admincard-title">Nrs. {supply.price}</p>
                             <p class="admincard-text">{supply.description}</p>
-                            <button class="btn btn-danger" onClick={() => handleDelete(supply.id)} >  Delete </button>
+                            <div className="btnEditDelete">
+                                {/* <button class="btn btn-danger" onClick={(supply) => handleDelete(supply.id)} >Delete </button> */}
+                                <button class="btn btn-danger" onClick={() => handleDelete(supply.id)}>Delete</button>
+
+
+                                {/* // =========================================================================================================================== */}
+                                {/* // =======================================================Model Opening======================================================= */}
+                                {/* // =========================================================================================================================== */}
+
+                                <Button className='btn btn-primary' onClick={() => { handleOpen(supply.id) }}>Edit</Button>
+                                <Modal
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                            <form onSubmit={handleEditSubmit} className="row g-3 mt-4">
+                                                {/* <input type="text" value={supplyid} onChange={(e) => setSupplyid(supply.id)} className="form-control is-valid" hidden required /> */}
+                                                <div className="col-md-6">
+                                                    <label className="form-label"> Batch</label>
+                                                    <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} className="form-control is-valid" required />
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Category</label>
+                                                    <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control is-valid" required />
+
+                                                </div>
+
+                                                <div className="col-md-6">
+                                                    <label className="form-label"> Company Name</label>
+                                                    <input type="text" value={companyname} onChange={(e) => setCompanyName(e.target.value)} className="form-control is-valid" required />
+
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Quantity</label>
+                                                    <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-control is-valid" required />
+
+                                                </div>
+                                                <div className="col-md-12">
+                                                    <label className="form-label">Expiry Date</label>
+                                                    <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control is-valid" required />
+
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label"> Name</label>
+                                                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control is-valid" required />
+
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <label className="form-label">Price</label>
+                                                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="form-control is-valid" required />
+
+                                                </div>
+                                                <div class="mb-12">
+                                                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                                    <textarea class="form-control" value={description} onChange={(e) => setDescription(e.target.value)} id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input type="file" class="form-control" onChange={(e) => setImage(e.target.files[0])} id="inputGroupFile02" />
+                                                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button class="btn btn-primary" onClick={() => setSupplyid(supply.id)} type="submit">Update</button>
+                                                </div>
+                                            </form>
+                                        </Typography>
+                                    </Box>
+                                </Modal>
+
+
+                                {/* // =========================================================================================================================== */}
+                                {/* // =======================================================Model Closing======================================================= */}
+                                {/* // =========================================================================================================================== */}
+
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -133,5 +350,4 @@ const Inventory = () => {
         </div>
     )
 }
-
 export default Inventory;

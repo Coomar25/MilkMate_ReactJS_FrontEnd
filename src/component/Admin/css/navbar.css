@@ -160,11 +160,16 @@ span {
 .adminorderCard{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-	margin-top: 40rem;
+	margin-top: 55rem;
 
+	
 }
 
-
+.btnEditDelete{
+	display: flex;
+	gap: 2rem;
+	height: 3rem;
+}
 .admincard {
     width: 20rem;
     margin: 20px;

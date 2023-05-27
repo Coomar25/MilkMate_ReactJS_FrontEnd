@@ -120,7 +120,7 @@ const Order = () => {
                     <div class="card">
                         <img class="card-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
                         <div class="card-body">
-                            <h1>{supply.id}</h1>
+                            {/* <h1>{supply.id}</h1> */}
                             <h5 class="card-title">{supply.name}</h5>
                             <p class="card-text">{supply.description}</p>
                             <p class="card-text"><h3>Price:- Nrs. {supply.price}</h3></p>
