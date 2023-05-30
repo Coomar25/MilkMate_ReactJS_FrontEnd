@@ -33,13 +33,12 @@ const DeliveryRecord = () => {
             date: date
         }).then((response) => {
             navigate('/record');
-            alert(response.data.message);
             setUserId('');
             setFat('');
             setLitre('');
             // setDeliveryDate('');
             window.location.reload();
-
+            alert(response.data.message);
         });
     };
 
@@ -90,7 +89,10 @@ const DeliveryRecord = () => {
                 }
             });
             setStatement(mergedData);
-        }).catch(error => console.error(error));
+        }).catch(error => {
+            alert(error.message || "Token Expired Please Relogin");
+            console.error(error);
+        });
     }, []);
 
     if (isLoading) {
@@ -113,7 +115,7 @@ const DeliveryRecord = () => {
                             className="form-control is-valid"
                             required
                         />
-                        <div className="valid-feedback">Looks good!</div>
+                        {/* <div className="valid-feedback">Looks good!</div> */}
                     </div>
                     <div className="col-md-4">
                         <label className="form-label">Fat</label>
@@ -125,7 +127,7 @@ const DeliveryRecord = () => {
                             className="form-control is-valid"
                             required
                         />
-                        <div className="valid-feedback">Looks good!</div>
+                        {/* <div className="valid-feedback">Looks good!</div> */}
                     </div>
                     <div className="col-md-4">
                         <label className="form-label">Litre</label>
@@ -137,7 +139,7 @@ const DeliveryRecord = () => {
                             className="form-control is-valid"
                             required
                         />
-                        <div className="valid-feedback">Looks good!</div>
+                        {/* <div className="valid-feedback">Looks good!</div> */}
                     </div>
                     {/* <div className="col-md-4">
                         <label className="form-label">Delivery Date</label>

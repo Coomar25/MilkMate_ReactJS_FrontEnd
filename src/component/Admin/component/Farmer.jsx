@@ -13,7 +13,6 @@ const Farmer = () => {
             const parsedFarmerData = response.data.farmersData;
             setIsLoading(false);
             const addInfo = response.data.addInfo;
-
             const mergedData = parsedFarmerData.map(farmer => {
                 const matchingAddInfo = addInfo.find(add => add.id === farmer.id);
                 return { ...farmer, ...matchingAddInfo };

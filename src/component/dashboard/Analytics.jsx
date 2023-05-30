@@ -24,7 +24,8 @@ const Analytics = () => {
                     price: order.price,
                     quantity: order.quantity,
                     expenditure: order.expenditure,
-                    created_at: order.created_at
+                    created_at: order.created_at,
+                    status: order.status
                 }
             });
             console.log(individualFarmerOrders);
@@ -54,6 +55,7 @@ const Analytics = () => {
                         <th scope='col'>Price</th>
                         <th scope='col'>Quantity</th>
                         <th scope='col'>Expenditure</th>
+                        <th scope='col'>Status</th>
                     </tr>
                 </thead>
                 <thead>
@@ -65,6 +67,7 @@ const Analytics = () => {
                             <th scope='col'>{order.price}</th>
                             <th scope='col'>{order.quantity}</th>
                             <th scope='col'>{order.expenditure}</th>
+                            <th scope='col'>{order.status}</th>
                         </tr>
                     ))}
                 </thead>

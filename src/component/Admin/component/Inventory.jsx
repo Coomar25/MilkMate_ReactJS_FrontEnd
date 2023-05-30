@@ -239,7 +239,7 @@ const Inventory = () => {
                     </div>
                     <div className="col-md-12">
                         <label className="form-label">Expiry Date</label>
-                        <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control " required />
+                        <input type="date" min={new Date().toISOString().split('T')[0]} value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
@@ -285,8 +285,8 @@ const Inventory = () => {
                             {/* <h5 class="admincard-title mt-4">{supply.id}</h5> */}
                             <h5 class="admincard-title mt-4">{supply.name}</h5>
                             <p class="admincard-title">Nrs. {supply.price}</p>
-                            <p class="admincard-text">{supply.description}</p>
-                            <p class="admincard-text">{supply.batch}</p>
+                            {/* <p class="admincard-text">{supply.description}</p> */}
+                            {/* <p class="admincard-text">{supply.batch}</p> */}
 
                             <div className="btnEditDelete">
                                 {/* <button class="btn btn-danger" onClick={(supply) => handleDelete(supply.id)} >Delete </button> */}
@@ -296,8 +296,7 @@ const Inventory = () => {
                                 {/* // =========================================================================================================================== */}
                                 {/* // =======================================================Detail Model Opening================================================== */}
                                 {/* // =========================================================================================================================== */}
-                                <Button className="btn btn-primary" onClick={() => handleOpenDetail(supply)}>View Details</Button>
-
+                                <Button className="btn btn-primary" variant="outlined" onClick={() => handleOpenDetail(supply)}>View Details</Button>
                                 <Modal
                                     open={openDetail}
                                     onClose={handleCloseDetail}
@@ -319,8 +318,11 @@ const Inventory = () => {
                                                 <div class="utility-info">
                                                     <ul class="utility-list">
                                                         <li class="comments">Expiry Date</li>
-                                                        <li class="date">{modelproductdescription.expirydate} Days</li>
+                                                        <li class="date">{modelproductdescription.expirydate} </li>
                                                     </ul>
+                                                </div>
+                                                <div class="card-info">
+                                                    Description:-{modelproductdescription.description}
                                                 </div>
                                                 <div class="gradient-overlay"></div>
                                                 <div class="color-overlay"></div>
@@ -335,7 +337,7 @@ const Inventory = () => {
                                 {/* // =======================================================Model Opening======================================================= */}
                                 {/* // =========================================================================================================================== */}
 
-                                <Button className='btn btn-primary' onClick={() => { handleOpen(supply.id) }}>Edit</Button>
+                                <Button className='btn btn-primary' variant="outlined" onClick={() => { handleOpen(supply.id) }}>Edit</Button>
                                 <Modal
                                     open={open}
                                     onClose={handleClose}
@@ -401,8 +403,6 @@ const Inventory = () => {
                                 {/* // =========================================================================================================================== */}
                                 {/* // =======================================================Model Closing======================================================= */}
                                 {/* // =========================================================================================================================== */}
-
-
                             </div>
                         </div>
                     </div>

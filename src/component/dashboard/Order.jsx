@@ -9,6 +9,9 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Loading from './Loading';
+import Typography from '@mui/material/Typography';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 import Khalti from './khalti/Khalti';
 import { createContext } from 'react';
@@ -44,6 +47,11 @@ const Order = () => {
 
     const [open, setOpen] = React.useState(false);
     const [selectedItem, setSelectedItem] = useState('');
+    // product description passing in model
+    const [modelproductdescription, setModelproductdescription] = useState('');
+    //search Query
+    const [searchQuery, setSearchQuery] = useState('');
+
 
 
 
@@ -88,21 +96,32 @@ const Order = () => {
         axios.get(`http://localhost:8000/api/fetchSuppyItem?token = ${token}`).then(response => {
             const parsedSuppyItem = response.data.supplyItem;
             setIsLoading(false);
-            const mergedData = parsedSuppyItem.map(supply => {
-                return {
-                    id: supply.id,
-                    name: supply.name,
-                    description: supply.description,
-                    price: supply.price,
-                    image: supply.image
-                };
-            });
-            setSupplyItem(mergedData);
+            // const mergedData = parsedSuppyItem.map(supply => {
+            //     return {
+            //         id: supply.id,
+            //         name: supply.name,
+            //         description: supply.description,
+            //         price: supply.price,
+            //         image: supply.image
+            //     };
+            // });
+            setSupplyItem(parsedSuppyItem);
         }).catch(error => {
             setIsLoading(false);
             console.error(error);
         });
     }, []);
+
+
+    // detail model
+    const [openDetail, setOpenDetail] = React.useState(false);
+    const handleOpenDetail = (supply) => {
+        setModelproductdescription(supply);
+        setOpenDetail(true);
+    };
+    const handleCloseDetail = () => {
+        setOpenDetail(false);
+    };
 
 
     if (isLoading) {
@@ -115,80 +134,147 @@ const Order = () => {
 
     return (
         <div>
-            <div className="orderCard">
-                {suppyitem && suppyitem.map(supply => (
-                    <div class="card">
-                        <img class="card-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
-                        <div class="card-body">
-                            {/* <h1>{supply.id}</h1> */}
-                            <h5 class="card-title">{supply.name}</h5>
-                            <p class="card-text">{supply.description}</p>
-                            <p class="card-text"><h3>Price:- Nrs. {supply.price}</h3></p>
-                            <button onClick={() => handleOpen(supply)} class="btn btn-primary">Order</button>
-                            {/* <Button className="btn btn-primary" onClick={() => handleOpenDetail(supply)}>View Details</Button> */}
+            {/* <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by category or product name"
+            /> */}
 
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
-                            >
-                                <Box sx={style}>
-                                    <form action="">
-                                        <TextField
-                                            hidden
-                                            className='mt-4'
-                                            id="outlined-disabled"
-                                            label="User_Id"
-                                            defaultValue={user.id}
-                                        />
-                                        <img class="card-img-top" src={"http://localhost:8000/images/" + selectedItem.image} alt="Card image cap" />
-                                        <TextField
-                                            disabled
-                                            className='mt-4'
-                                            id="outlined-disabled"
-                                            label="Product Name"
-                                            defaultValue={selectedItem.name}
-                                        />
-                                        <TextField
-                                            className='mt-4'
-                                            disabled
-                                            id="outlined-disabled"
-                                            label="Product Pricce"
-                                            defaultValue={"Nrs:- " + selectedItem.price}
-                                        />
-                                        <TextField
-                                            className='mt-4'
-                                            id="outlined-number"
-                                            label="Enter Quantity"
-                                            type="number"
-                                            value={quantity}
-                                            onChange={handleChange}
-                                            name='quantity'
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
-                                        <TextField
-                                            className='mt-4'
-                                            disabled
-                                            id="outlined-disabled"
-                                            label="Product Pricce"
-                                            defaultValue={selectedItem.description}
-                                        />
-                                        <Stack className='mt-4' spacing={2} direction="row">
-                                            <Button variant="contained" onClick={handleOrder} >Dairy Income</Button>
-                                        </Stack>
-                                    </form>
-                                    {/* <AppState.Provider value={{ selectedItem }}>
+            {/* Search Input Tag Material Ui */}
+            <Stack spacing={2} sx={{ width: 300 }}>
+                <Autocomplete
+                    freeSolo
+                    id="search-autocomplete"
+                    disableClearable
+                    options={suppyitem.map((supply) => supply.category + " " + supply.name)}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Search by category or product name"
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            InputProps={{
+                                ...params.InputProps,
+                                type: 'search',
+                            }}
+                        />
+                    )}
+                />
+            </Stack>
+
+            <div className="orderCard">
+                {suppyitem && suppyitem
+                    .filter((supply) =>
+                        supply.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        supply.name.toLowerCase().includes(searchQuery.toLowerCase())
+                    )
+                    .map(supply => (
+                        <div class="card">
+                            <img class="card-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
+                            <div class="card-body">
+                                {/* <h1>{supply.id}</h1> */}
+                                <h5 class="card-title">{supply.name}</h5>
+                                <p class="card-text">{supply.description}</p>
+                                <p class="card-text"><h3>Price:- Nrs. {supply.price}</h3></p>
+                                <button onClick={() => handleOpen(supply)} class="btn btn-primary">Order</button>
+                                <Modal
+                                    open={open}
+                                    onClose={handleClose}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <form action="">
+                                            <TextField
+                                                hidden
+                                                className='mt-4'
+                                                id="outlined-disabled"
+                                                label="User_Id"
+                                                defaultValue={user.id}
+                                            />
+                                            <img class="card-img-top" src={"http://localhost:8000/images/" + selectedItem.image} alt="Card image cap" />
+                                            <TextField
+                                                disabled
+                                                className='mt-4'
+                                                id="outlined-disabled"
+                                                label="Product Name"
+                                                defaultValue={selectedItem.name}
+                                            />
+                                            <TextField
+                                                className='mt-4'
+                                                disabled
+                                                id="outlined-disabled"
+                                                label="Product Pricce"
+                                                defaultValue={"Nrs:- " + selectedItem.price}
+                                            />
+                                            <TextField
+                                                className='mt-4'
+                                                id="outlined-number"
+                                                label="Enter Quantity"
+                                                type="number"
+                                                value={quantity}
+                                                onChange={handleChange}
+                                                name='quantity'
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            />
+                                            <TextField
+                                                className='mt-4'
+                                                disabled
+                                                id="outlined-disabled"
+                                                label="Product Pricce"
+                                                defaultValue={selectedItem.description}
+                                            />
+                                            <Stack className='mt-4' spacing={2} direction="row">
+                                                <Button variant="contained" onClick={handleOrder} >Dairy Income</Button>
+                                            </Stack>
+                                        </form>
                                         <Khalti className="mt-4" />
-                                    </AppState.Provider> */}
-                                    <Khalti className="mt-4" />
-                                </Box>
-                            </Modal>
+                                    </Box>
+                                </Modal>
+
+
+                                {/* // =========================================================================================================================== */}
+                                {/* // =======================================================Detail Model Opening================================================== */}
+                                {/* // =========================================================================================================================== */}
+
+                                <Button className='ml-2 mt-2' variant="outlined" onClick={() => handleOpenDetail(supply)}>View Details</Button>
+                                <Modal
+                                    open={openDetail}
+                                    onClose={handleCloseDetail}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                            <div class="blog-card spring-fever">
+                                                <div class="title-content" >
+                                                    <h3>BATCH:-{modelproductdescription.batch}</h3>
+                                                    <hr />
+                                                    <div class="intro">Category:- {modelproductdescription.category}</div>
+                                                    <div class="intro">Company Name:- {modelproductdescription.companyname}</div>
+                                                </div>
+                                                <div class="card-info">
+                                                    Quantity:-{modelproductdescription.quantity}
+                                                </div>
+                                                <div class="utility-info">
+                                                    <ul class="utility-list">
+                                                        <li class="comments">Expiry Date</li>
+                                                        <li class="date">{modelproductdescription.expirydate} Days</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="gradient-overlay"></div>
+                                                <div class="color-overlay"></div>
+                                            </div>
+                                        </Typography>
+                                    </Box>
+                                </Modal>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
 
             </div>
         </div >
