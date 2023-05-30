@@ -87,3 +87,13 @@ body{
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
+.GuestPage{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-style: oblique;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

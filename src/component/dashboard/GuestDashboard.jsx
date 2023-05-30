@@ -3,7 +3,7 @@ import React from 'react'
 const GuestDashboard = () => {
     return (
         <div>
-            <h1>Guest Page</h1>
+            <h1 className='GuestPage'>Guest Page</h1>
         </div>
     )
 }

@@ -13,6 +13,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
+
+//Bootstrap Modal
+
+
 //model styling
 const style = {
     position: 'absolute',
@@ -40,6 +44,10 @@ const Inventory = () => {
     const [expirydate, setExpiryDate] = useState('');
     const [supplyid, setSupplyid] = useState('');
     const [editSuppyId, setEditSupplyId] = useState('');
+    // Product Description
+    const [productdescription, setProductDescription] = useState('');
+    // product description passing in model
+    const [modelproductdescription, setModelproductdescription] = useState('');
 
 
     //fOR lOADING
@@ -137,17 +145,19 @@ const Inventory = () => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/fetchSuppyItem').then(response => {
             const parsedSuppyItem = response.data.supplyItem;
+            const parsedProductDescription = response.data.productdescription;
             // console.log(parsedSuppyItem);
-            const mergedData = parsedSuppyItem.map(supply => {
-                return {
-                    id: supply.id,
-                    name: supply.name,
-                    description: supply.description,
-                    price: supply.price,
-                    image: supply.image
-                };
-            });
-            setSupplyItem(mergedData);
+            // const mergedData = parsedSuppyItem.map(supply => {
+            //     return {
+            //         id: supply.id,
+            //         name: supply.name,
+            //         description: supply.description,
+            //         price: supply.price,
+            //         image: supply.image
+            //     };
+            // });
+            setSupplyItem(parsedSuppyItem);
+            setProductDescription(parsedProductDescription);
         }).catch(error => console.error(error));
     }, []);
 
@@ -174,13 +184,23 @@ const Inventory = () => {
         setOpen(true);
     }
     const handleClose = () => setOpen(false);
+
+
+    // detail model
+    const [openDetail, setOpenDetail] = React.useState(false);
+    const handleOpenDetail = (description) => {
+        setModelproductdescription(description);
+        setOpenDetail(true);
+    };
+    const handleCloseDetail = () => {
+        setOpenDetail(false);
+    };
     // =============================================================Loading Section=============================================================================================
 
     //Loading Section
     if (isLoading) {
         return <AdminLoadingSection />
     }
-
 
     // ===============================================================Component Rendering===================================================================================
 
@@ -190,14 +210,14 @@ const Inventory = () => {
                 <form onSubmit={handleSubmit} className="row g-3 mt-4">
                     <div className="col-md-6">
                         <label className="form-label"> Batch</label>
-                        <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} className="form-control is-valid" required />
+                        <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div className="col-md-6">
                         <label className="form-label">Category</label>
-                        <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control is-valid" required />
+                        <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
@@ -205,35 +225,35 @@ const Inventory = () => {
 
                     <div className="col-md-6">
                         <label className="form-label"> Company Name</label>
-                        <input type="text" value={companyname} onChange={(e) => setCompanyName(e.target.value)} className="form-control is-valid" required />
+                        <input type="text" value={companyname} onChange={(e) => setCompanyName(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div className="col-md-6">
                         <label className="form-label">Quantity</label>
-                        <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-control is-valid" required />
+                        <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div className="col-md-12">
                         <label className="form-label">Expiry Date</label>
-                        <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control is-valid" required />
+                        <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div className="col-md-6">
                         <label className="form-label"> Name</label>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control is-valid" required />
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div className="col-md-6">
                         <label className="form-label">Price</label>
-                        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="form-control is-valid" required />
+                        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="form-control " required />
                         <div className="valid-feedback">
                             Looks good!
                         </div>
@@ -253,7 +273,7 @@ const Inventory = () => {
             </div>
 
             {/* // =========================================================================================================================== */}
-            {/* // =======================================================Card Disolaying======================================================= */}
+            {/* // =======================================================Card Displaying======================================================= */}
             {/* // =========================================================================================================================== */}
 
 
@@ -266,9 +286,49 @@ const Inventory = () => {
                             <h5 class="admincard-title mt-4">{supply.name}</h5>
                             <p class="admincard-title">Nrs. {supply.price}</p>
                             <p class="admincard-text">{supply.description}</p>
+                            <p class="admincard-text">{supply.batch}</p>
+
                             <div className="btnEditDelete">
                                 {/* <button class="btn btn-danger" onClick={(supply) => handleDelete(supply.id)} >Delete </button> */}
-                                <button class="btn btn-danger" onClick={() => handleDelete(supply.id)}>Delete</button>
+                                <button className="btn btn-danger" onClick={() => handleDelete(supply.id)}>Delete</button>
+
+
+                                {/* // =========================================================================================================================== */}
+                                {/* // =======================================================Detail Model Opening================================================== */}
+                                {/* // =========================================================================================================================== */}
+                                <Button className="btn btn-primary" onClick={() => handleOpenDetail(supply)}>View Details</Button>
+
+                                <Modal
+                                    open={openDetail}
+                                    onClose={handleCloseDetail}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box sx={style}>
+                                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                            <div class="blog-card spring-fever">
+                                                <div class="title-content" >
+                                                    <h3>BATCH:-{modelproductdescription.batch}</h3>
+                                                    <hr />
+                                                    <div class="intro">Category:- {modelproductdescription.category}</div>
+                                                    <div class="intro">Company Name:- {modelproductdescription.companyname}</div>
+                                                </div>
+                                                <div class="card-info">
+                                                    Quantity:-{modelproductdescription.quantity}
+                                                </div>
+                                                <div class="utility-info">
+                                                    <ul class="utility-list">
+                                                        <li class="comments">Expiry Date</li>
+                                                        <li class="date">{modelproductdescription.expirydate} Days</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="gradient-overlay"></div>
+                                                <div class="color-overlay"></div>
+                                            </div>
+                                        </Typography>
+                                    </Box>
+                                </Modal>
+
 
 
                                 {/* // =========================================================================================================================== */}
@@ -285,40 +345,40 @@ const Inventory = () => {
                                     <Box sx={style}>
                                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                                             <form onSubmit={handleEditSubmit} className="row g-3 mt-4">
-                                                {/* <input type="text" value={supplyid} onChange={(e) => setSupplyid(supply.id)} className="form-control is-valid" hidden required /> */}
+
                                                 <div className="col-md-6">
                                                     <label className="form-label"> Batch</label>
-                                                    <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="text" value={batch} onChange={(e) => setBatch(e.target.value)} className="form-control " required />
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">Category</label>
-                                                    <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control " required />
 
                                                 </div>
 
                                                 <div className="col-md-6">
                                                     <label className="form-label"> Company Name</label>
-                                                    <input type="text" value={companyname} onChange={(e) => setCompanyName(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="text" value={companyname} onChange={(e) => setCompanyName(e.target.value)} className="form-control " required />
 
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">Quantity</label>
-                                                    <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-control " required />
 
                                                 </div>
                                                 <div className="col-md-12">
                                                     <label className="form-label">Expiry Date</label>
-                                                    <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="number" value={expirydate} onChange={(e) => setExpiryDate(e.target.value)} className="form-control " required />
 
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label"> Name</label>
-                                                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control " required />
 
                                                 </div>
                                                 <div className="col-md-6">
                                                     <label className="form-label">Price</label>
-                                                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="form-control is-valid" required />
+                                                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="form-control " required />
 
                                                 </div>
                                                 <div class="mb-12">
@@ -342,10 +402,13 @@ const Inventory = () => {
                                 {/* // =======================================================Model Closing======================================================= */}
                                 {/* // =========================================================================================================================== */}
 
+
                             </div>
                         </div>
                     </div>
                 ))}
+
+
             </div>
         </div>
     )

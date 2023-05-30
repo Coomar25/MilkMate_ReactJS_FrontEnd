@@ -116,7 +116,7 @@ const Order = () => {
     return (
         <div>
             <div className="orderCard">
-                {suppyitem.map(supply => (
+                {suppyitem && suppyitem.map(supply => (
                     <div class="card">
                         <img class="card-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
                         <div class="card-body">
@@ -125,6 +125,7 @@ const Order = () => {
                             <p class="card-text">{supply.description}</p>
                             <p class="card-text"><h3>Price:- Nrs. {supply.price}</h3></p>
                             <button onClick={() => handleOpen(supply)} class="btn btn-primary">Order</button>
+                            {/* <Button className="btn btn-primary" onClick={() => handleOpenDetail(supply)}>View Details</Button> */}
 
                             <Modal
                                 open={open}
