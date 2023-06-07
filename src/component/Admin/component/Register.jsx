@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthUser from '../../AuthUser/AuthUser';
 import AdminLoadingSection from './AdminLoadingSection';
 
+
 const Register = () => {
     const navigate = useNavigate();
     const { http, token } = AuthUser();
@@ -74,83 +75,88 @@ const Register = () => {
 
 
     return (
-        <div className='registerform'>
-            <h1 className='mt-4 mb-4'>Register User</h1>
-            <div className='mb-3 row'>
-                <label className='col-sm-3 col-form-label'>Name</label>
-                <div className='col-md-12'>
-                    <input
-                        type='text'
-                        name='name'
-                        value={name}
-                        onChange={handleChange}
-                        className='form-control'
-                    />
-                </div>
-            </div>
-            <div className='mb-3 row'>
-                <label className='col-sm-3 col-form-label'>Email</label>
-                <div className='col-sm-12'>
-                    <input
-                        type='text'
-                        name='email'
-                        value={email}
-                        onChange={handleChange}
-                        className='form-control'
-                    />
-                </div>
-            </div>
-            <div className='mb-3 row'>
-                <label className='col-sm-3 col-form-label'>Password</label>
-                <div className='col-sm-12'>
-                    <input
-                        type='password'
-                        name='password'
-                        value={password}
-                        onChange={handleChange}
-                        className='form-control'
-                    />
-                </div>
-            </div>
-            <div className='mb-3 row'>
-                <label className='col-sm-3 col-form-label'>Confirm Password</label>
-                <div className='col-sm-12'>
-                    <input
-                        type='password'
-                        name='password_confirmation'
-                        value={passwordConfirmation}
-                        onChange={handleChange}
-                        className='form-control'
-                    />
-                </div>
-            </div>
-            <div className='mb-3 row'>
-                <label className='col-sm-3 col-form-label'>Contact</label>
-                <div className='col-sm-12'>
-                    <input
-                        type='tel'
-                        name='contact'
-                        value={contact}
-                        onChange={handleChange}
-                        className='form-control'
-                    />
-                </div>
-            </div>
-            <div className='mb-3 row'>
-                <label className='col-sm-3 col-form-label'>Address</label>
-                <div className='col-sm-12'>
-                    <input
-                        type='tel'
-                        name='address'
-                        value={address}
-                        onChange={handleChange}
-                        className='form-control'
-                    />
-                </div>
-            </div>
-            <button type="button" onClick={handleSubmit} className="btn btn-primary">Register</button>
+
+        <div>
 
 
+
+            {/* Registration through Admin Pannel */}
+            <div className='registerform'>
+                <h1 className='mt-4 mb-4'>Register User</h1>
+                <div className='mb-3 row'>
+                    <label className='col-sm-12 col-form-label'>Name</label>
+                    <div className='col-md-12'>
+                        <input
+                            type='text'
+                            name='name'
+                            value={name}
+                            onChange={handleChange}
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <div className='mb-3 row'>
+                    <label className='col-sm-3 col-form-label'>Email</label>
+                    <div className='col-sm-12'>
+                        <input
+                            type='text'
+                            name='email'
+                            value={email}
+                            onChange={handleChange}
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <div className='mb-3 row'>
+                    <label className='col-sm-3 col-form-label'>Password</label>
+                    <div className='col-sm-12'>
+                        <input
+                            type='password'
+                            name='password'
+                            value={password}
+                            onChange={handleChange}
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <div className='mb-3 row'>
+                    <label className='col-sm-3 col-form-label'>Confirm Password</label>
+                    <div className='col-sm-12'>
+                        <input
+                            type='password'
+                            name='password_confirmation'
+                            value={passwordConfirmation}
+                            onChange={handleChange}
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <div className='mb-3 row'>
+                    <label className='col-sm-3 col-form-label'>Contact</label>
+                    <div className='col-sm-12'>
+                        <input
+                            type='tel'
+                            name='contact'
+                            value={contact}
+                            onChange={handleChange}
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <div className='mb-3 row'>
+                    <label className='col-sm-3 col-form-label'>Address</label>
+                    <div className='col-sm-12'>
+                        <input
+                            type='tel'
+                            name='address'
+                            value={address}
+                            onChange={handleChange}
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <button type="button" onClick={handleSubmit} className="btn btn-primary">Register</button>
+            </div>
         </div>
     )
 }

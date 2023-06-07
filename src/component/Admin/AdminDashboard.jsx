@@ -7,6 +7,7 @@ import Register from './component/Register'
 import Inventory from './component/Inventory'
 import UserOrder from './component/UserOrder'
 import AuthUser from '../AuthUser/AuthUser'
+import MailRegister from './component/MailRegister'
 
 
 
@@ -26,6 +27,7 @@ const AdminDashboard = () => {
                 <NavLink to='/register'>  <a href="#">Register</a> </NavLink>
                 <NavLink to='/inventory'>  <a href="#">Inventory</a> </NavLink>
                 <NavLink to='/userOrder'>  <a href="#">Order</a> </NavLink>
+                <NavLink to='/mailRegister'>  <a href="#" >Mail Register</a> </NavLink>
                 <a href="#">  <span role="button" className="nav-link" onClick={logoutAdmin}>Logout</span></a>
 
 
@@ -35,12 +37,12 @@ const AdminDashboard = () => {
 
             <div className="container">
                 <Routes>
-
                     <Route path="/dashboard" element={<Farmer />} />
                     <Route path="/record" element={<DeliveryRecord />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/inventory" element={<Inventory />} />
                     <Route path="/userOrder" element={<UserOrder />} />
+                    <Route path="/mailRegister" element={<MailRegister />} />
                 </Routes>
 
             </div>

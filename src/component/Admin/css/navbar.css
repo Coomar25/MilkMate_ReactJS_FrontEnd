@@ -1,8 +1,7 @@
 .adminNavbar {
 	margin: 27px auto 0;
-
 	position: relative;
-	width: 900px;
+	width: 1100px;
 	height: 50px;
 	background-color: #34495e;
 	border-radius: 8px;
@@ -44,6 +43,14 @@ a:nth-child(4) {
 a:nth-child(5) {
 	width: 150px;
 }
+a:nth-child(6) {
+	width: 150px;
+}
+a:nth-child(7) {
+	width: 150px;
+}
+
+/* 
 .adminNavbar .start-home, a:nth-child(1):hover~.animation {
 	width: 150px;
 	left: 0;
@@ -69,6 +76,16 @@ a:nth-child(5) {
 	left: 600px;
 	background-color: #e67e22;
 }
+.adminNavbar .start-mail, a:nth-child(6):hover~.animation {
+	width: 150px;
+	left: 600px;
+	background-color: #6cc030;
+}
+.adminNavbar .start-logout, a:nth-child(7):hover~.animation {
+	width: 150px;
+	left: 600px;
+	background-color: #2ba09a;
+} */
 
 /* body {
 	font-size: 12px;
@@ -100,17 +117,19 @@ span {
 }
 
 
-.registerform{
+ .registerform{
 	background-color: #1abc9c;
 	width: 500px;
 	padding: 3rem;
 	border-radius: 1rem;
 	position: absolute;
-	top: 50%;
+	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin-top: 6rem;
 }
+
+
 
 .farmertable{
 	background-color: #2BD6B4;
@@ -150,7 +169,7 @@ span {
 	padding: 4rem;
 	border-radius: 1rem;
 	position: absolute;
-	top: 50%;
+	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 
@@ -197,6 +216,17 @@ span {
     margin-bottom: 10px;
   }
 
+.mailComponent{
+	
+	width: 90vw;
+	margin-top: 4rem;
+	position: absolute;
+	top: 30%;
+	left: 80%;
+	transform: translate(-50%,-50%);
+}
+
+  
 
 
 
