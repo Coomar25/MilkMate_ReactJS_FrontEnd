@@ -82,6 +82,7 @@ const DeliveryRecord = () => {
             const mergedData = parsedRecordStatement.map(overallstatement => {
                 return {
                     user_id: overallstatement.user_id,
+                    farmername: overallstatement.farmername,
                     fat: overallstatement.fat,
                     litre: overallstatement.litre,
                     date: overallstatement.date,
@@ -176,6 +177,7 @@ const DeliveryRecord = () => {
                     <thead>
                         <tr>
                             <th scope='col'>User_ID</th>
+                            <th scope='col'>Farmer Name</th>
                             <th scope='col'>Fat</th>
                             <th scope='col'>Litre</th>
                             <th scope='col'>Date</th>
@@ -186,6 +188,7 @@ const DeliveryRecord = () => {
                         {statement && statement.map(overallstatement => (
                             <tr key={overallstatement.user_id}>
                                 <th scope='col'>{overallstatement.user_id}</th>
+                                <th scope='col'>{overallstatement.farmername}</th>
                                 <th scope='col'>{overallstatement.fat}</th>
                                 <th scope='col'>{overallstatement.litre}</th>
                                 <th scope='col'>{overallstatement.date}</th>
