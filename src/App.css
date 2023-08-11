@@ -98,3 +98,71 @@ body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/* Guest Page */
+
+.homepage {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: url("../src/component/image/carousel-1.jpg");
+    background-position: center 65%;
+    background-size: cover;
+    background-attachment: fixed;
+    margin-left: -16rem;
+    color: #edeffd;
+  }
+  .homepage::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .homepage .content {
+    display: flex;
+    height: 85%;
+    z-index: 3;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .homepage .content h1 {
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .homepage .content .text {
+    margin-bottom: 50px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  .homepage .content .text p{
+    color: #fff;
+
+  }
+  .content a {
+    color: #000;
+    display: block;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin: 0 10px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    background: #fff;
+    border: 2px solid #fff;
+    transition: 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+  }
+  .content a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.3);
+  }
+
+
+
+

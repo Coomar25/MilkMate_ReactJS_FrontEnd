@@ -20,11 +20,10 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className='lgnPageindex'>
             <h1 className='pt-4 text-primary loginTitle '>Login Here</h1>
             <div className="container ">
                 <div className="loginContainer">
-
                     <form>
                         {/* <!-- Email input --> */}
                         <div className="form-outline mb-4">
