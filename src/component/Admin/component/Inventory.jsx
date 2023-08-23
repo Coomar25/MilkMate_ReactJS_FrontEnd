@@ -146,7 +146,7 @@ const Inventory = () => {
         axios.get('http://localhost:8000/api/fetchSuppyItem').then(response => {
             const parsedSuppyItem = response.data.supplyItem;
             const parsedProductDescription = response.data.productdescription;
-            // console.log(parsedSuppyItem);
+            console.log(parsedSuppyItem);
             // const mergedData = parsedSuppyItem.map(supply => {
             //     return {
             //         id: supply.id,
@@ -165,7 +165,7 @@ const Inventory = () => {
     const handleDelete = (id) => {
         console.log(id);
         axios.post(`http://localhost:8000/api/deleteInventory/${id}`).then((response) => {
-            // console.log(response);
+            console.log(response);
             alert("Product has been deleted form inventory");
             window.location.reload();
             navigate('/inventory');
@@ -282,9 +282,9 @@ const Inventory = () => {
                     <div class="admincard p-4">
                         <img class="admincard-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
                         <div class="admincard-body">
-                            {/* <h5 class="admincard-title mt-4">{supply.id}</h5> */}
                             <h5 class="admincard-title mt-4">{supply.name}</h5>
                             <p class="admincard-title">Nrs. {supply.price}</p>
+                            <h5 class="admincard-title mt-4">{supply.id}</h5>
                             {/* <p class="admincard-text">{supply.description}</p> */}
                             {/* <p class="admincard-text">{supply.batch}</p> */}
 
