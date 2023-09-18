@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Loading = () => {
     return (
-        <div className='loadingSection'>
+        <div className='loadingSection ml-4 pl-4'>
             <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
                 <LinearProgress color="secondary" />
                 <LinearProgress color="success" />

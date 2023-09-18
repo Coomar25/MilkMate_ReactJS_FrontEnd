@@ -1,0 +1,43 @@
+.centered {
+    display: flex;
+    justify-content: center;
+    margin-top: 10rem;
+    min-width: 80vh;
+  }
+  
+  .wrapper {
+    text-align: center;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  .card {
+    grid-area: 1 / 1;
+    height: 200px;
+    width: 400px;
+    transform: translateX(10px) rotateY(25deg) rotateX(10deg);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 30px;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 60px;
+    font-weight: 900;
+    backface-visibility: hidden;
+  }
+
+  .wrapper:hover > div,
+  .wrapper:hover:before {
+    transform: none;
+  }
+  
+  .wrapper > div,
+  .wrapper:before {
+    will-change: transform;
+    transition: 0.3s transform cubic-bezier(0.25, 0.46, 0.45, 1);
+  }
+  
+

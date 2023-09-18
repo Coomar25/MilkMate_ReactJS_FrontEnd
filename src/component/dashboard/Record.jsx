@@ -56,7 +56,6 @@ function DeliveryTable() {
             <section>
 
                 {/* <!-- Recent Order table --> */}
-
                 <div class="recent-order">
                     <h2>Recent Order</h2>
                     <table>
@@ -97,6 +96,8 @@ function DeliveryTable() {
                     </table>
 
                 </div>
+
+
             </section>
 
         </div>

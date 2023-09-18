@@ -45,44 +45,55 @@ const Analytics = () => {
     }
 
     return (
-        <div className='farmerOrderTable'>
-            <table className='table'>
-                <thead>
-                    <tr>
-                        <th scope='col'>User_ID</th>
-                        <th scope='col'>Name</th>
-                        <th scope='col'>Ordered Date</th>
-                        <th scope='col'>Price</th>
-                        <th scope='col'>Quantity</th>
-                        <th scope='col'>Expenditure</th>
-                        <th scope='col'>Status</th>
-                    </tr>
-                </thead>
-                <thead>
-                    {individualFarmerOrders && individualFarmerOrders.map(order => (
-                        <tr key={order.user_id}>
-                            <th scope='col'> {order.user_id}</th>
-                            <th scope='col'>{order.name}</th>
-                            <th scope='col'>{order.created_at}</th>
-                            <th scope='col'>{order.price}</th>
-                            <th scope='col'>{order.quantity}</th>
-                            <th scope='col'>{order.expenditure}</th>
-                            <th scope='col'>{order.status}</th>
-                        </tr>
-                    ))}
-                </thead>
+      <div className="farmerOrderTable">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">User_ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Ordered Date</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Expenditure</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <thead>
+            {individualFarmerOrders &&
+              individualFarmerOrders.map((order) => (
+                <tr key={order.user_id}>
+                  <th scope="col"> {order.user_id}</th>
+                  <th scope="col">{order.name}</th>
+                  <th scope="col">{order.created_at}</th>
+                  <th scope="col">{order.price}</th>
+                  <th scope="col">{order.quantity}</th>
+                  <th scope="col">{order.expenditure}</th>
+                  <th scope="col">{order.status}</th>
+                </tr>
+              ))}
+          </thead>
 
-                <thead>
-                    <tr text-color='red'>
-                        <th colSpan={3} className='text-center'>Total Order Statement</th>
-                        <th scope='col'>{totalPriceQuantity.individualOrderTotalPrice}</th>
-                        <th scope='col'>{totalPriceQuantity.individualOrderTotalQuantity}</th>
-                        <th scope='col'>{totalPriceQuantity.individualOrderTotalExpenditure}</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    )
+          <thead>
+            <tr text-color="red">
+              <th colSpan={3} className="text-center">
+                Total Order Statement
+              </th>
+              <th scope="col">
+                {totalPriceQuantity.individualOrderTotalPrice}
+              </th>
+              <th scope="col">
+                {totalPriceQuantity.individualOrderTotalQuantity}
+              </th>
+              <th scope="col">
+                {totalPriceQuantity.individualOrderTotalExpenditure}
+              </th>
+            </tr>
+          </thead>
+        </table>
+
+        
+      </div>
+    );
 }
 
 export default Analytics

@@ -14,7 +14,7 @@ import MailRegister from './component/MailRegister'
 const AdminDashboard = () => {
     const { token, logout } = AuthUser();
     const logoutAdmin = () => {
-        if (token != undefined) {
+        if (token !== undefined) {
             logout();
         }
     }
