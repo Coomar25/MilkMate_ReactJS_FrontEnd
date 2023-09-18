@@ -27,7 +27,7 @@ const Farmer = () => {
     }
 
     return (
-        <div className='farmertable'>
+        <div className='p-4 mt-4'>
             <table className="table">
                 <thead>
                     <tr>

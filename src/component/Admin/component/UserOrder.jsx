@@ -64,7 +64,7 @@ const UserOrder = () => {
 
 
     return (
-        <div className='farmertable mt-4'>
+        <div className='p-4 mt-4'>
             <table className='table'>
                 <thead>
                     <tr>

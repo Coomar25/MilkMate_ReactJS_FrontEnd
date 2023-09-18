@@ -35,9 +35,37 @@ const Register = () => {
             setContact('');
             navigate('/dashboard');
             alert(response.data.message);
-        }).finally(() => {
-            setIsLoading(false); // Set isLoading to false after the request is completed
+        }) .catch((error) => {
+            setIsLoading(false);
+            if (error.response) {
+                // Server responded with an error status code
+                const serverErrors = error.response.data.errors;
+                // Handle serverErrors object to display error messages
+                if (serverErrors.email) {
+                    // Handle email validation error
+                    alert(serverErrors.email[0]);
+                }
+                if (serverErrors.password) {
+                    // Handle password validation error
+                    alert(serverErrors.password[0]);
+                }
+                if (serverErrors.contact) {
+                    // Handle password validation error
+                    alert(serverErrors.contact[0]);
+                }
+                if (serverErrors.address) {
+                    // Handle password validation error
+                    alert(serverErrors.address[0]);
+                }
+            } else {
+                // Handle network or other errors
+                alert('An error occurred while processing your request.');
+            }
         });
+        
+        // .finally(() => {
+        //     setIsLoading(false); // Set isLoading to false after the request is completed
+        // });
     };
 
     const handleChange = (event) => {
@@ -75,13 +103,9 @@ const Register = () => {
 
 
     return (
-
         <div>
-
-
-
             {/* Registration through Admin Pannel */}
-            <div className='registerform'>
+            <div className='mt-4 p-4'>
                 <h1 className='mt-4 mb-4'>Register User</h1>
                 <div className='mb-3 row'>
                     <label className='col-sm-12 col-form-label'>Name</label>

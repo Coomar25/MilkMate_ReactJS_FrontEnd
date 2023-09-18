@@ -90,9 +90,10 @@ const DeliveryRecord = () => {
                 }
             });
             setStatement(mergedData);
-        }).catch(error => {
-            alert(error.message || "Token Expired Please Relogin");
-            console.error(error);
+        }).catch((response) => {
+            // alert(error.message || "Token Expired Please Relogin");
+            // console.error(error);
+            alert(response.data.message);
         });
     }, []);
 
@@ -103,7 +104,7 @@ const DeliveryRecord = () => {
 
 
     return (
-        <div className="deliveryRecord">
+        <div className='p-4 mt-4 d-flex'>
             <form onSubmit={handleSubmit}>
                 <div className="row g-3">
                     <div className="col-md-4">
