@@ -142,8 +142,8 @@ span {
 	transform: translate(-50%, -50%);
 }
 .deliveryStatementAdmin{
-	background-color: #2BD6B4;
-	width: 1000px;
+	/* background-color: #2BD6B4; */
+	width: 1200px;
 	padding: 4rem;
 	border-radius: 1rem;
 	position: absolute;

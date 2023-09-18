@@ -32,10 +32,11 @@ const MailRegister = () => {
             email
         }).then((response) => {
             alert(response.data.message);
-        }).finally(() => {
+        }).finally((response) => {
             setIsLoading(false); // Set isLoading to false after the request is completed
+            alert(response.data.message);
+            // alert('Failed to authenticate on SMTP server.');            
         });
-
     }
 
     if (isLoading) {
@@ -43,7 +44,7 @@ const MailRegister = () => {
     }
 
     return (
-        <div className='mailComponent'>
+        <div className='p-4 mt-4'>
             <Box
                 sx={{
                     width: 500,

@@ -206,7 +206,7 @@ const Inventory = () => {
 
     return (
         <div>
-            <div className='inventory mt-4'>
+            <div className='p-4 mt-4'>
                 <form onSubmit={handleSubmit} className="row g-3 mt-4">
                     <div className="col-md-6">
                         <label className="form-label"> Batch</label>
@@ -277,7 +277,7 @@ const Inventory = () => {
             {/* // =========================================================================================================================== */}
 
 
-            <div className="adminorderCard">
+            <div className="mt-4 p-4">
                 {suppyitem && suppyitem.map(supply => (
                     <div class="admincard p-4">
                         <img class="admincard-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
