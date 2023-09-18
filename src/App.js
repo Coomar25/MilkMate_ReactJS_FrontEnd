@@ -9,8 +9,6 @@ import AdminDashboard from "./component/Admin/AdminDashboard";
 import './App.css';
 
 
-
-
 function App() {
     return (
         <div className="App">
