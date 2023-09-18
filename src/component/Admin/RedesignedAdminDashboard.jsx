@@ -52,7 +52,7 @@ const RedesignedAdminDashboard = () => {
 
         <li>
           <a href="#" class="active">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-box"></i>
             <NavLink to='/record'>  
                 <a href="#">
                     <span class="links_name">Collection Record</span>
@@ -64,7 +64,7 @@ const RedesignedAdminDashboard = () => {
 
         <li>
           <a href="#" class="active">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-list-ul"></i>
             <NavLink to='/register'>  
                 <a href="#">
                     <span class="links_name">Register</span>
@@ -76,7 +76,7 @@ const RedesignedAdminDashboard = () => {
 
         <li>
           <a href="#" class="active">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-coin-stack"></i>
             <NavLink to='/inventory'>  
                 <a href="#">
                     <span class="links_name">Inventory</span>
@@ -88,10 +88,10 @@ const RedesignedAdminDashboard = () => {
 
         <li>
           <a href="#" class="active">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-book-alt"></i>
             <NavLink to='/userOrder'>  
                 <a href="#">
-                    <span class="links_name">Users</span>
+                    <span class="links_name">Users Orders</span>
                 </a>   
             </NavLink>
           </a>
@@ -99,7 +99,7 @@ const RedesignedAdminDashboard = () => {
 
         <li>
           <a href="#" class="active">
-            <i class="bx bx-grid-alt"></i>
+            <i class="bx bx-user"></i>
             <NavLink to='/mailRegister'>  
                 <a href="#">
                     <span class="links_name">Mail Registration</span>

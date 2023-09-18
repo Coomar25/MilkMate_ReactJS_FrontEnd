@@ -10,6 +10,7 @@ const Farmer = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/totalFarmers?token=${token}`).then(response => {
+        
             const parsedFarmerData = response.data.farmersData;
             setIsLoading(false);
             const addInfo = response.data.addInfo;
@@ -17,6 +18,7 @@ const Farmer = () => {
                 const matchingAddInfo = addInfo.find(add => add.id === farmer.id);
                 return { ...farmer, ...matchingAddInfo };
             });
+           
 
             setFarmersData(mergedData);
         }).catch(error => console.error(error));
