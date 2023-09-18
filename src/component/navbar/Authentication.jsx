@@ -3,6 +3,8 @@ import AuthUser from '../AuthUser/AuthUser'
 import GuestUser from './GuestUser'
 import AuthenticatedUser from './AuthenticatedUser'
 import AdminDashboard from '../Admin/AdminDashboard'
+import RedesignedAdminDashboard from '../../component/Admin/RedesignedAdminDashboard'
+
 
 const Authentication = () => {
     const { getToken } = AuthUser();
@@ -12,12 +14,11 @@ const Authentication = () => {
         return <GuestUser />
     }
     if (getUtype() === "ADM") {
-        return <AdminDashboard />
+        return <RedesignedAdminDashboard />
     }
     return (
         <AuthenticatedUser />
     )
-
 }
 
 export default Authentication
