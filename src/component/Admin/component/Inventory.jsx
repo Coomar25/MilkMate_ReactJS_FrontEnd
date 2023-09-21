@@ -45,7 +45,7 @@ const Inventory = () => {
     const [supplyid, setSupplyid] = useState('');
     const [editSuppyId, setEditSupplyId] = useState('');
     // Product Description
-    const [productdescription, setProductDescription] = useState('');
+    // const [productdescription, setProductDescription] = useState('');
     // product description passing in model
     const [modelproductdescription, setModelproductdescription] = useState('');
 
@@ -145,7 +145,7 @@ const Inventory = () => {
     useEffect(() => {
         axios.get('http://localhost:8000/api/fetchSuppyItem').then(response => {
             const parsedSuppyItem = response.data.supplyItem;
-            const parsedProductDescription = response.data.productdescription;
+            // const parsedProductDescription = response.data.productdescription;
             console.log(parsedSuppyItem);
             // const mergedData = parsedSuppyItem.map(supply => {
             //     return {
@@ -157,7 +157,7 @@ const Inventory = () => {
             //     };
             // });
             setSupplyItem(parsedSuppyItem);
-            setProductDescription(parsedProductDescription);
+            // setProductDescription(parsedProductDescription);
         }).catch(error => console.error(error));
     }, []);
 
@@ -277,10 +277,10 @@ const Inventory = () => {
             {/* // =========================================================================================================================== */}
 
 
-            <div className="mt-4 p-4">
+            <div className="mt-4 p-4 d-flex flex-wrap">
                 {suppyitem && suppyitem.map(supply => (
-                    <div class="admincard p-4">
-                        <img class="admincard-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Card image cap" />
+                    <div class="admincard p-4" style={{ flex: "0 0 25%" }}>
+                        <img class="admincard-img-top" src={"http://localhost:8000/images/" + supply.image} alt="Product: {supply.name}" />
                         <div class="admincard-body">
                             <h5 class="admincard-title mt-4">{supply.name}</h5>
                             <p class="admincard-title">Nrs. {supply.price}</p>

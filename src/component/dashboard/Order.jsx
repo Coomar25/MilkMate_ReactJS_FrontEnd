@@ -232,7 +232,7 @@ const Order = () => {
                                                 <Button variant="contained" onClick={handleOrder} >Dairy Income</Button>
                                             </Stack>
                                         </form>
-                                        <Khalti className="mt-4" />
+                                        <Khalti className="mt-4" productid={selectedItem.id}  name={selectedItem.name} quantity={selectedItem.quantity} price={selectedItem.price}/>
                                     </Box>
                                 </Modal>
 

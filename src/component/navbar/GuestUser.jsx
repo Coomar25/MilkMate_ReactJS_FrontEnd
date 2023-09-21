@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink, Router, navLinksStyles } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../login/Login'
 import GuestDashboard from '../dashboard/GuestDashboard'
-import AuthUser from '../AuthUser/AuthUser';
+// import AuthUser from '../AuthUser/AuthUser';
 import ForgotPasswordLink from '../login/ForgotPasswordLink';
 
 const GuestUser = () => {
@@ -18,7 +18,7 @@ const GuestUser = () => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg text-white bg-dark">
                 <div className="container">
                     <button
                         className="navbar-toggler"
@@ -35,17 +35,17 @@ const GuestUser = () => {
 
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Dashboard</a>
+                                <a className="nav-link text-white" href="/">Milk Dairy</a>
                             </li>
                         </ul>
 
 
                         <div className="d-flex align-items-center">
-                            <button type="button" className="btn btn-link px-3 me-2">
-                                <NavLink style={navLinksStyles} to="/" >Dashboard</NavLink>
+                            <button type="button" className="btn btn-link px-3 me-2 ">
+                                <NavLink style={navLinksStyles} className="text-white" to="/" >Dashboard</NavLink>
                             </button>
                             <button type="button" className="btn btn-link px-3 me-2">
-                                <NavLink style={navLinksStyles} to='/login' >Login</NavLink>
+                                <NavLink style={navLinksStyles} className="text-white" to='/login' >Login</NavLink>
                             </button>
                         </div>
                     </div>
