@@ -1,11 +1,11 @@
 
 import {
     BrowserRouter as Router,
-    Routes,
-    Route,
+    // Routes,
+    // Route,
 } from "react-router-dom";
 import Authentication from "./component/navbar/Authentication";
-import AdminDashboard from "./component/Admin/AdminDashboard";
+// import AdminDashboard from "./component/Admin/AdminDashboard";
 import './App.css';
 
 

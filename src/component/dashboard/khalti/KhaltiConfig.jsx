@@ -2,14 +2,18 @@ import myKey from './KhaltiKey'
 // import { AppState } from '../Order'
 // import { useContext } from 'react';
 import axios from 'axios';
+// import AuthUser from '../../AuthUser/AuthUser';
 
 
+// const {user} = AuthUser()
+// const userID = user.id;
+// console.log(userID);
 let config = {
     "publicKey": myKey.publicTestKey,
-    "productName": "product 1",
-    "description": "Description here",
-    "quantity": "quantity here",
-    "productIdentity": "1234567890",
+    // "productName": "product 1",
+    // "description": "Description here",
+    // "quantity": "quantity here",
+    // "productIdentity": "1234567890",
     "productUrl": "http://gameofthrones.com/buy/Dragons",
     "eventHandler": {
         onSuccess(payload) {
@@ -17,7 +21,7 @@ let config = {
             console.log(payload);
             let data = {
                 "token": payload.token,
-                "amount": payload.amount
+                "amount": payload.amount,
             };
             let config = {
                 headers: { 'Authorization': myKey.secretKey }
